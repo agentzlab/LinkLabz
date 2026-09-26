@@ -59,15 +59,14 @@
     body::before {
       content: "";
       position: fixed;
-      inset: -18px;
+      inset: 0;
       z-index: 0;
       pointer-events: none;
       background:
-        linear-gradient(145deg, rgba(9,10,12,.91), rgba(17,20,23,.82)),
-        radial-gradient(circle at 12% 8%, rgba(82,71,72,.22), transparent 38%),
-        radial-gradient(circle at 88% 30%, rgba(91,111,87,.16), transparent 36%);
-      filter: blur(5px) saturate(.72);
-      transform: scale(1.025);
+        radial-gradient(1100px 620px at 10% -6%, rgba(232,182,76,.17), transparent 60%),
+        radial-gradient(950px 720px at 97% 24%, rgba(106,96,112,.24), transparent 62%),
+        radial-gradient(1250px 900px at 50% 118%, rgba(82,71,72,.30), transparent 60%),
+        linear-gradient(168deg, #151518 0%, #202025 44%, #101012 100%);
     }
 
     body.nav-is-open { overflow: hidden; }
@@ -214,19 +213,7 @@
       background: linear-gradient(90deg, var(--accent), transparent);
     }
 
-    .summary::after {
-      content: "";
-      position: absolute;
-      right: -78px;
-      bottom: -116px;
-      width: 280px;
-      height: 280px;
-      border: 42px solid rgba(82, 71, 72, .13);
-      border-radius: 50%;
-      box-shadow: 0 0 70px rgba(82, 71, 72, .12);
-      pointer-events: none;
-      z-index: 0;
-    }
+    
 
     .summary > * { position: relative; z-index: 1; }
 
@@ -1318,7 +1305,7 @@
       .manage-actions { display: grid; grid-template-columns: repeat(3, 1fr); }
       .manage-btn { padding: 0 7px; font-size: 11px; }
       .summary { min-height: 260px; padding: 26px 22px; }
-      .summary::after { right: -130px; bottom: -120px; }
+      
       .brand-line { align-items: flex-start; flex-direction: column; gap: 15px; }
       .brand-mark { width: 40px; height: 40px; flex-basis: 40px; }
       .brand-name { font-size: 21px; }
@@ -1440,7 +1427,7 @@
     .top-nav, .managebar, .facet-popover, .command-palette, .drawer, .drawer-control-strip, .drawer-actions { background: rgba(243,241,238,.94); }
     .nav-scrim, .modal-backdrop, .command-backdrop { background: rgba(13,13,13,.6); }
     .workspace-tab.active, .manage-btn.primary, .brief-btn, .empty-action, .drawer-actions .source-btn { color: #f7f5f2; box-shadow: 0 8px 20px rgba(13,13,13,.16); }
-    .summary::after { border-color: rgba(82,71,72,.13); box-shadow: 0 0 70px rgba(82,71,72,.1); }
+    
     .signal-dot { box-shadow: 0 0 0 5px var(--accent-soft), 0 0 22px rgba(82,71,72,.38); }
     .lane[data-lane="inbox"] { border-color: rgba(106,96,112,.3); background: linear-gradient(180deg, var(--cyan-soft), rgba(54,54,59,.05) 120px); }
     .lane[data-lane="try"] { border-color: rgba(91,111,87,.32); background: linear-gradient(180deg, var(--try-soft), rgba(54,54,59,.05) 120px); }
