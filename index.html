@@ -1508,34 +1508,71 @@ body::before {
       .top-nav, .managebar, .facet-popover, .command-palette, .drawer, .drawer-control-strip, .drawer-actions { background: rgba(28,28,28,.94); }
       .gradient-swatch { border-color: rgba(242,240,237,.14); }
       .hold-banner, .hold-stamp { color: var(--danger); }
-    /* ===== Raindrop section (Deckz pattern) ===== */
+    /* ===== Raindrop section — WorkshopLabz deck pattern ===== */
     .rd-toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:18px 0 20px; }
     .rd-toolbar .search-wrap { flex:1 1 240px; }
     .rd-toolbar .select-wrap { flex:0 1 auto; }
-    .rd-count-line { color:var(--muted); font-size:13px; margin:0 0 4px; }
-    .raindrop-deck { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
-    .raindrop-card { cursor:pointer; border-top:3px solid rgba(200,64,52,.62); transition:transform .18s ease, box-shadow .18s ease; }
-    .raindrop-card:hover, .raindrop-card:focus-visible { transform:translateY(-3px); box-shadow:var(--shadow); outline:none; }
-    .raindrop-card h3 { margin:10px 0 8px; font-size:18px; line-height:1.25; }
-    .rd-meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+    .rd-deck-shell { position:relative; min-height:475px; overflow:hidden; background:linear-gradient(180deg, rgba(13,13,13,.86), rgba(28,28,28,.42)); border:1px solid var(--line-strong); border-radius:14px; perspective:1400px; touch-action:pan-y; }
+    .rd-deck-header { position:absolute; z-index:12; top:18px; right:20px; left:20px; display:flex; align-items:center; justify-content:space-between; gap:16px; pointer-events:none; }
+    .rd-deck-count { color:var(--muted); font:500 11px/1.2 "IBM Plex Mono", monospace; }
+    .rd-deck-hint { color:var(--muted); font-size:12px; }
+    .rd-deck-stage { position:absolute; inset:58px 0 70px; transform-style:preserve-3d; }
+    .rd-deck-card { position:absolute; top:50%; left:50%; width:338px; min-height:314px; margin:0; padding:0; overflow:hidden; text-align:left; color:var(--ink); background:var(--surface-solid); border:1px solid var(--line-strong); border-radius:12px; box-shadow:0 22px 52px rgba(0,0,0,.44); cursor:pointer; font:inherit; transform:translate(-50%,-50%) scale(.62); opacity:0; pointer-events:none; transition:transform .42s cubic-bezier(.2,.7,.2,1), opacity .3s ease, filter .3s ease, border-color .3s ease; transform-style:preserve-3d; }
+    .rd-deck-card:hover { border-color:var(--accent-strong); }
+    .rd-deck-card:focus-visible { outline:2px solid var(--accent-strong); outline-offset:4px; }
+    .rd-deck-card.pos-0 { z-index:6; opacity:1; pointer-events:auto; border-color:rgba(242,240,237,.45); transform:translate(-50%,-50%) translateZ(70px) rotateY(0deg) scale(1); }
+    .rd-deck-card.pos--1 { z-index:4; opacity:.74; pointer-events:auto; filter:saturate(.72) brightness(.78); transform:translate(calc(-50% - 278px),-50%) translateZ(-50px) rotateY(34deg) scale(.82); }
+    .rd-deck-card.pos-1 { z-index:4; opacity:.74; pointer-events:auto; filter:saturate(.72) brightness(.78); transform:translate(calc(-50% + 278px),-50%) translateZ(-50px) rotateY(-34deg) scale(.82); }
+    .rd-deck-card.pos--2 { z-index:2; opacity:.28; transform:translate(calc(-50% - 478px),-50%) translateZ(-150px) rotateY(44deg) scale(.66); }
+    .rd-deck-card.pos-2 { z-index:2; opacity:.28; transform:translate(calc(-50% + 478px),-50%) translateZ(-150px) rotateY(-44deg) scale(.66); }
+    .rd-card-top { position:relative; display:block; height:104px; overflow:hidden; padding:18px 20px; background:rgba(13,13,13,.55); border-bottom:1px solid var(--line); }
+    .rd-card-number { position:absolute; right:10px; bottom:-18px; color:rgba(242,240,237,.09); font:600 102px/1 "IBM Plex Mono", monospace; letter-spacing:-.1em; }
+    .rd-card-category { position:relative; z-index:1; color:#f0d9a8; font:600 11px/1.5 "IBM Plex Mono", monospace; letter-spacing:.08em; text-transform:uppercase; }
+    .rd-card-stars { display:block; margin-top:6px; color:#e8b64c; letter-spacing:2px; font-size:12px; }
+    .rd-card-body { display:flex; min-height:210px; flex-direction:column; justify-content:space-between; padding:22px 20px 19px; }
+    .rd-card-title { display:block; }
+    .rd-card-title strong { display:block; font-size:23px; line-height:1.12; letter-spacing:-.01em; }
+    .rd-card-summary { display:block; margin:11px 0 20px; color:var(--muted); font-size:13px; line-height:1.48; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .rd-card-bottom { display:flex; align-items:center; justify-content:space-between; gap:14px; padding-top:14px; border-top:1px solid var(--line); }
+    .rd-status { display:inline-flex; align-items:center; gap:7px; color:#a9e6b8; font:600 10px/1.2 "IBM Plex Mono", monospace; letter-spacing:.02em; text-transform:uppercase; }
+    .rd-status::before { content:""; width:7px; height:7px; flex:none; background:currentColor; border-radius:50%; }
+    .rd-status.lead { color:#f2b8b0; }
+    .rd-open-label { color:var(--ink); font:600 10px/1 "IBM Plex Mono", monospace; text-transform:uppercase; letter-spacing:.07em; }
+    .rd-deck-controls { position:absolute; z-index:15; right:0; bottom:0; left:0; display:flex; align-items:center; justify-content:center; gap:14px; padding:13px 18px; background:rgba(13,13,13,.78); border-top:1px solid var(--line); }
+    .rd-deck-arrow { display:inline-flex; align-items:center; justify-content:center; min-width:42px; min-height:42px; padding:0 13px; color:var(--ink); background:var(--surface-2); border:1px solid var(--line-strong); border-radius:8px; cursor:pointer; font-size:15px; }
+    .rd-deck-arrow:hover { border-color:var(--accent-strong); }
+    .rd-deck-arrow:disabled { opacity:.35; cursor:default; }
+    .rd-deck-dots { display:flex; align-items:center; justify-content:center; gap:7px; min-width:94px; }
+    .rd-deck-dot { width:7px; height:7px; padding:0; background:var(--line-strong); border:0; border-radius:50%; cursor:pointer; }
+    .rd-deck-dot[aria-current="true"] { width:24px; background:#e8b64c; border-radius:5px; }
+    .rd-empty { padding:54px 24px; color:var(--muted); text-align:center; background:var(--surface-solid); border:1px solid var(--line-strong); border-radius:14px; margin-top:16px; }
     .rd-chip { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:3px 9px; border-radius:999px; border:1px solid var(--line-strong); color:var(--muted); }
     .rd-chip.lane { color:#f0d9a8; border-color:rgba(232,182,76,.45); }
     .rd-chip.on-deck { color:#a9e6b8; border-color:rgba(120,200,140,.4); }
     .rd-chip.lead { color:#f2b8b0; border-color:rgba(200,64,52,.5); }
     .rd-stars { color:#e8b64c; letter-spacing:2px; font-size:13px; }
     .rd-verdict { font-weight:700; font-size:13px; margin:8px 0 4px; }
-    .rd-why { margin:0; color:var(--muted); font-size:13px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-    .rd-src { font-size:12px; color:var(--muted); }
     .rd-overlay { position:fixed; inset:0; z-index:120; background:rgba(8,8,10,.78); backdrop-filter:blur(6px); display:flex; align-items:flex-start; justify-content:center; padding:48px 16px; overflow-y:auto; }
     .rd-overlay[hidden] { display:none; }
-    .rd-detail { width:min(760px,100%); background:var(--bg); border:1px solid var(--line-strong); border-radius:16px; padding:28px; box-shadow:var(--shadow); border-top:4px solid rgba(200,64,52,.7); }
+    .rd-detail { width:min(760px,100%); background:var(--bg); border:1px solid var(--line-strong); border-radius:16px; padding:28px; box-shadow:var(--shadow); }
     .rd-detail-top { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:18px; }
-    .rd-detail-nav { display:flex; gap:8px; }
+    .rd-detail-nav { display:flex; gap:8px; align-items:center; }
     .rd-detail h2 { margin:6px 0 10px; font-size:26px; line-height:1.2; }
     .rd-detail h4 { margin:20px 0 6px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
     .rd-detail p.body { margin:0; font-size:15px; line-height:1.6; }
     .rd-links { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
     .rd-pos { font-size:12px; color:var(--muted); }
+    .rd-meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+    .rd-src { font-size:12px; color:var(--muted); }
+    @media (max-width:640px) {
+      .rd-deck-shell { min-height:450px; }
+      .rd-deck-stage { inset:48px 0 66px; }
+      .rd-deck-hint { display:none; }
+      .rd-deck-card { width:min(286px, calc(100vw - 54px)); min-height:300px; }
+      .rd-deck-card.pos--1 { transform:translate(calc(-50% - 225px),-50%) translateZ(-50px) rotateY(32deg) scale(.78); }
+      .rd-deck-card.pos-1 { transform:translate(calc(-50% + 225px),-50%) translateZ(-50px) rotateY(-32deg) scale(.78); }
+      .rd-deck-card.pos--2, .rd-deck-card.pos-2 { opacity:0; }
+    }
 
   </style>
 </head>
@@ -1719,8 +1756,19 @@ body::before {
         <div class="select-wrap"><label class="sr-only" for="rd-status">Filter by status</label><select class="select-control" id="rd-status"><option value="all">Any status</option><option value="on-deck">On deck</option><option value="lead">Lead</option></select></div>
         <div class="select-wrap"><label class="sr-only" for="rd-grade">Minimum grade</label><select class="select-control" id="rd-grade"><option value="0">Any grade</option><option value="5">★★★★★ 5</option><option value="4">★★★★+ 4</option><option value="3">★★★+ 3</option></select></div>
       </div>
-      <p class="rd-count-line" id="rd-count-line"></p>
-      <div class="raindrop-deck" id="raindrop-deck"></div>
+      <section class="rd-deck-shell" id="rd-deck-shell" aria-label="Browse Raindrop keepers">
+        <div class="rd-deck-header">
+          <span class="rd-deck-count" id="rd-deck-count" aria-live="polite"></span>
+          <span class="rd-deck-hint">Browse the deck &middot; open a card for full details</span>
+        </div>
+        <div class="rd-deck-stage" id="rd-deck-stage"></div>
+        <div class="rd-deck-controls">
+          <button class="rd-deck-arrow" id="rd-deck-prev" type="button" aria-label="Previous card">&larr;</button>
+          <div class="rd-deck-dots" id="rd-deck-dots" aria-label="Choose card"></div>
+          <button class="rd-deck-arrow" id="rd-deck-next" type="button" aria-label="Next card">&rarr;</button>
+        </div>
+      </section>
+      <div class="rd-empty" id="rd-empty" hidden><strong>Nothing matches.</strong><p>Loosen a filter to see the deck again.</p></div>
     </section>
     <datalist id="project-vocabulary"></datalist>
   </main>
@@ -3309,108 +3357,169 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         { title: "Novamira Pro \u2014 MCP for Divi 5 docs", url: "https://novamira.ai/mcp/divi/", repo_url: "", source_collection: "Divi Wordpress AI", lane: "Divi 5", grade: 3, status: "on-deck", date_added: "2026-09-26", verdict: "KEEP \u2014 docs reference", why: "MCP docs for Novamira Pro: pages, modules, loops, dynamic content, theme builder over MCP. Already in the knowledge base.", harvest_notes: "No new harvest \u2014 docs reference only." }
       ];
       var rdFilters = { q: "", lane: "all", collection: "all", status: "all", minGrade: 0 };
+      var rdVisibleCards = [];
+      var rdDeckIndex = 0;
       var rdDetailList = [];
       var rdDetailPos = -1;
+      var rdPointerStart = null;
 
-      function rdStars(g) { var s = ""; for (var i = 1; i <= 5; i++) s += i <= g ? "\u2605" : "\u2606"; return s; }
+      function rdStars(g) { var s = ""; for (var i = 1; i <= 5; i++) s += i <= g ? "★" : "☆"; return s; }
+      function rdWrap(v, n) { if (!n) return 0; return (v % n + n) % n; }
       function rdFiltered() {
-        var q = rdFilters.q.toLowerCase();
+        var q = rdFilters.q.trim().toLowerCase();
         return RAINDROP_CARDS.filter(function (c) {
           if (rdFilters.lane !== "all" && c.lane !== rdFilters.lane) return false;
           if (rdFilters.collection !== "all" && c.source_collection !== rdFilters.collection) return false;
           if (rdFilters.status !== "all" && c.status !== rdFilters.status) return false;
           if (c.grade < rdFilters.minGrade) return false;
-          if (q && (c.title + " " + c.verdict + " " + c.why + " " + c.harvest_notes).toLowerCase().indexOf(q) < 0) return false;
+          if (q) {
+            var hay = (c.title + " " + c.verdict + " " + c.why + " " + c.harvest_notes + " " + c.url).toLowerCase();
+            if (hay.indexOf(q) === -1) return false;
+          }
           return true;
         });
       }
-      function rdCardHtml(c, i) {
-        return '<article class="utility-card raindrop-card" data-rd-open="' + i + '" tabindex="0" role="button" aria-label="Open ' + escapeHtml(c.title) + '">' +
-          '<div class="rd-meta"><span class="rd-chip lane">' + escapeHtml(c.lane) + '</span>' +
-          '<span class="rd-chip ' + c.status + '">' + escapeHtml(c.status) + '</span>' +
-          '<span class="rd-stars" aria-label="' + c.grade + ' of 5 stars">' + rdStars(c.grade) + '</span></div>' +
-          '<h3>' + escapeHtml(c.title) + '</h3>' +
-          '<p class="rd-verdict">' + escapeHtml(c.verdict) + '</p>' +
-          '<p class="rd-why">' + escapeHtml(c.why) + '</p>' +
-          '<div class="utility-actions"><span class="rd-src">' + escapeHtml(c.source_collection) + ' \u00b7 ' + escapeHtml(c.date_added) + '</span></div></article>';
+      function rdDeckCardHtml(c) {
+        var n = String(RAINDROP_CARDS.indexOf(c) + 1).padStart(2, "0");
+        return '<button class="rd-deck-card" type="button" data-rd-open="' + RAINDROP_CARDS.indexOf(c) + '" aria-label="Open ' + escapeHtml(c.title) + ' details">' +
+          '<span class="rd-card-top"><span class="rd-card-category">' + escapeHtml(c.lane) + '<span class="rd-card-stars">' + rdStars(c.grade) + '</span></span><span class="rd-card-number">' + n + '</span></span>' +
+          '<span class="rd-card-body"><span><span class="rd-card-title"><strong>' + escapeHtml(c.title) + '</strong></span>' +
+          '<span class="rd-card-summary">' + escapeHtml(c.verdict + " — " + c.why) + '</span></span>' +
+          '<span class="rd-card-bottom"><span class="rd-status' + (c.status === "lead" ? " lead" : "") + '">' + escapeHtml(c.status) + '</span><span class="rd-open-label">Open →</span></span></span></button>';
       }
       function renderRaindrop() {
-        var deck = document.getElementById("raindrop-deck");
-        if (!deck) return;
+        var stage = document.getElementById("rd-deck-stage");
+        if (!stage) return;
         var laneSel = document.getElementById("rd-lane");
-        if (laneSel.options.length <= 1) RAINDROP_LANES.forEach(function (l) { var o = document.createElement("option"); o.value = l; o.textContent = l; laneSel.appendChild(o); });
+        if (laneSel.options.length <= 1) {
+          RAINDROP_LANES.forEach(function (l) {
+            var o = document.createElement("option"); o.value = l; o.textContent = l; laneSel.appendChild(o);
+          });
+        }
         var colSel = document.getElementById("rd-collection");
-        var cols = [];
-        RAINDROP_CARDS.forEach(function (c) { if (cols.indexOf(c.source_collection) < 0) cols.push(c.source_collection); });
-        var keep = colSel.value;
-        colSel.innerHTML = '<option value="all">All collections</option>';
-        cols.forEach(function (c) { var o = document.createElement("option"); o.value = c; o.textContent = c; colSel.appendChild(o); });
-        colSel.value = cols.indexOf(keep) >= 0 ? keep : "all";
-        rdFilters.collection = colSel.value;
-        var list = rdFiltered();
+        if (colSel.options.length <= 1) {
+          Array.from(new Set(RAINDROP_CARDS.map(function (c) { return c.source_collection; }))).sort().forEach(function (c) {
+            var o = document.createElement("option"); o.value = c; o.textContent = c; colSel.appendChild(o);
+          });
+        }
+        rdVisibleCards = rdFiltered();
         document.getElementById("tab-raindrop-count").textContent = RAINDROP_CARDS.length;
-        document.getElementById("rd-count-line").textContent = list.length + " of " + RAINDROP_CARDS.length + " keepers on deck";
-        deck.innerHTML = list.length ? list.map(function (c) { return rdCardHtml(c, RAINDROP_CARDS.indexOf(c)); }).join("") :
-          '<div class="empty-shelf"><strong>Nothing matches.</strong><p>Loosen a filter to see the deck again.</p></div>';
+        var shell = document.getElementById("rd-deck-shell");
+        var empty = document.getElementById("rd-empty");
+        var dots = document.getElementById("rd-deck-dots");
+        if (!rdVisibleCards.length) {
+          shell.hidden = true;
+          empty.hidden = false;
+          return;
+        }
+        shell.hidden = false;
+        empty.hidden = true;
+        rdDeckIndex = rdWrap(rdDeckIndex, rdVisibleCards.length);
+        stage.innerHTML = rdVisibleCards.map(rdDeckCardHtml).join("");
+        var cards = stage.querySelectorAll(".rd-deck-card");
+        dots.innerHTML = "";
+        rdVisibleCards.forEach(function (c, vi) {
+          var card = cards[vi];
+          var offset = vi - rdDeckIndex;
+          if (offset > rdVisibleCards.length / 2) offset -= rdVisibleCards.length;
+          if (offset < -rdVisibleCards.length / 2) offset += rdVisibleCards.length;
+          card.classList.add("pos-" + offset);
+          if (Math.abs(offset) > 1) card.hidden = true;
+          card.tabIndex = Math.abs(offset) <= 1 ? 0 : -1;
+          var dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "rd-deck-dot";
+          dot.setAttribute("aria-label", "Show keeper " + (vi + 1));
+          dot.setAttribute("aria-current", vi === rdDeckIndex ? "true" : "false");
+          dot.addEventListener("click", function () { rdDeckIndex = vi; renderRaindrop(); });
+          dots.appendChild(dot);
+        });
+        document.getElementById("rd-deck-count").textContent = (rdDeckIndex + 1) + " of " + rdVisibleCards.length + (rdVisibleCards.length === 1 ? " keeper" : " keepers");
+        document.getElementById("rd-deck-prev").disabled = rdVisibleCards.length < 2;
+        document.getElementById("rd-deck-next").disabled = rdVisibleCards.length < 2;
       }
-      function openRaindropDetail(cardIdx) {
+      function rdMoveDeck(amount) {
+        if (rdVisibleCards.length < 2) return;
+        rdDeckIndex = rdWrap(rdDeckIndex + amount, rdVisibleCards.length);
+        renderRaindrop();
+      }
+      function openRaindropDetail(idx) {
         rdDetailList = rdFiltered();
-        rdDetailPos = rdDetailList.indexOf(RAINDROP_CARDS[cardIdx]);
-        if (rdDetailPos < 0) rdDetailPos = 0;
+        rdDetailPos = rdDetailList.findIndex(function (c) { return RAINDROP_CARDS.indexOf(c) === idx; });
+        if (rdDetailPos < 0) { rdDetailList = [RAINDROP_CARDS[idx]]; rdDetailPos = 0; }
         renderRaindropDetail();
         document.getElementById("rd-overlay").hidden = false;
         document.body.style.overflow = "hidden";
       }
       function renderRaindropDetail() {
         var c = rdDetailList[rdDetailPos];
-        var box = document.getElementById("rd-detail");
-        var links = '<a class="manage-btn primary" href="' + escapeHtml(c.url) + '" target="_blank" rel="noopener noreferrer">Open link \u2197</a>';
-        if (c.repo_url) links += '<a class="manage-btn" href="' + escapeHtml(c.repo_url) + '" target="_blank" rel="noopener noreferrer">Repo \u2197</a>';
-        box.innerHTML =
-          '<div class="rd-detail-top"><button class="manage-btn" type="button" data-rd-home>\u2190 Deck</button>' +
-          '<div class="rd-detail-nav"><span class="rd-pos">' + (rdDetailPos + 1) + ' / ' + rdDetailList.length + '</span>' +
-          '<button class="manage-btn" type="button" data-rd-prev' + (rdDetailPos <= 0 ? ' disabled' : '') + '>\u2190 Prev</button>' +
-          '<button class="manage-btn" type="button" data-rd-next' + (rdDetailPos >= rdDetailList.length - 1 ? ' disabled' : '') + '>Next \u2192</button></div></div>' +
-          '<div class="rd-meta"><span class="rd-chip lane">' + escapeHtml(c.lane) + '</span>' +
+        if (!c) return;
+        var chips = '<span class="rd-chip lane">' + escapeHtml(c.lane) + '</span>' +
           '<span class="rd-chip ' + c.status + '">' + escapeHtml(c.status) + '</span>' +
-          '<span class="rd-stars">' + rdStars(c.grade) + '</span>' +
-          '<span class="rd-src">' + escapeHtml(c.source_collection) + ' \u00b7 ' + escapeHtml(c.date_added) + '</span></div>' +
-          '<h2>' + escapeHtml(c.title) + '</h2>' +
-          '<p class="rd-verdict">' + escapeHtml(c.verdict) + '</p>' +
-          '<h4>Why it made the board</h4><p class="body">' + escapeHtml(c.why) + '</p>' +
-          '<h4>Harvest notes</h4><p class="body">' + escapeHtml(c.harvest_notes) + '</p>' +
-          '<div class="rd-links">' + links + '</div>';
+          '<span class="rd-stars">' + rdStars(c.grade) + '</span>';
+        var links = '<a class="utility-open-link" href="' + escapeHtml(c.url) + '" target="_blank" rel="noopener">Open link ↗</a>';
+        if (c.repo_url) links += ' <a class="utility-open-link" href="' + escapeHtml(c.repo_url) + '" target="_blank" rel="noopener">Repo ↗</a>';
+        document.getElementById("rd-detail").innerHTML =
+          '<div class="rd-detail-top"><button class="workspace-back-btn" id="rd-back" type="button">← Deck</button>' +
+          '<div class="rd-detail-nav"><button class="deck-arrow workspace-back-btn" id="rd-prev" type="button"' + (rdDetailPos === 0 ? " disabled" : "") + '>← Prev</button>' +
+          '<span class="rd-pos">' + (rdDetailPos + 1) + " / " + rdDetailList.length + '</span>' +
+          '<button class="deck-arrow workspace-back-btn" id="rd-next" type="button"' + (rdDetailPos === rdDetailList.length - 1 ? " disabled" : "") + '>Next →</button></div></div>' +
+          '<div class="rd-meta">' + chips + '</div><h2>' + escapeHtml(c.title) + "</h2>" +
+          '<p class="rd-src">' + escapeHtml(c.source_collection) + " · " + escapeHtml(c.date_added) + "</p>" +
+          '<div class="rd-verdict">' + escapeHtml(c.verdict) + "</div>" +
+          "<h4>Why it matters</h4>" + '<p class="body">' + escapeHtml(c.why) + "</p>" +
+          "<h4>Harvest notes</h4>" + '<p class="body">' + escapeHtml(c.harvest_notes) + "</p>" +
+          '<div class="rd-links">' + links + "</div>";
+        document.getElementById("rd-back").addEventListener("click", closeRaindropDetail);
+        document.getElementById("rd-prev").addEventListener("click", function () { if (rdDetailPos > 0) { rdDetailPos--; renderRaindropDetail(); } });
+        document.getElementById("rd-next").addEventListener("click", function () { if (rdDetailPos < rdDetailList.length - 1) { rdDetailPos++; renderRaindropDetail(); } });
       }
       function closeRaindropDetail() {
         document.getElementById("rd-overlay").hidden = true;
         document.body.style.overflow = "";
-        rdDetailPos = -1;
+        renderRaindrop();
       }
       function initRaindrop() {
-        var bind = function (id, evt, fn) { var el = document.getElementById(id); if (el) el.addEventListener(evt, fn); };
-        bind("rd-search", "input", function (e) { rdFilters.q = e.target.value.trim(); closeRaindropDetail(); renderRaindrop(); });
-        bind("rd-lane", "change", function (e) { rdFilters.lane = e.target.value; closeRaindropDetail(); renderRaindrop(); });
-        bind("rd-collection", "change", function (e) { rdFilters.collection = e.target.value; closeRaindropDetail(); renderRaindrop(); });
-        bind("rd-status", "change", function (e) { rdFilters.status = e.target.value; closeRaindropDetail(); renderRaindrop(); });
-        bind("rd-grade", "change", function (e) { rdFilters.minGrade = parseInt(e.target.value, 10) || 0; closeRaindropDetail(); renderRaindrop(); });
-        document.addEventListener("click", function (e) {
-          var opener = e.target.closest("[data-rd-open]");
-          if (opener) { openRaindropDetail(parseInt(opener.getAttribute("data-rd-open"), 10)); return; }
-          if (e.target.closest("[data-rd-home]")) { closeRaindropDetail(); return; }
-          if (e.target.closest("[data-rd-prev]") && rdDetailPos > 0) { rdDetailPos--; renderRaindropDetail(); return; }
-          if (e.target.closest("[data-rd-next]") && rdDetailPos < rdDetailList.length - 1) { rdDetailPos++; renderRaindropDetail(); return; }
-          if (e.target.id === "rd-overlay") { closeRaindropDetail(); return; }
+        document.getElementById("rd-search").addEventListener("input", function (e) { rdFilters.q = e.target.value; rdDeckIndex = 0; renderRaindrop(); });
+        document.getElementById("rd-lane").addEventListener("change", function (e) { rdFilters.lane = e.target.value; rdDeckIndex = 0; renderRaindrop(); });
+        document.getElementById("rd-collection").addEventListener("change", function (e) { rdFilters.collection = e.target.value; rdDeckIndex = 0; renderRaindrop(); });
+        document.getElementById("rd-status").addEventListener("change", function (e) { rdFilters.status = e.target.value; rdDeckIndex = 0; renderRaindrop(); });
+        document.getElementById("rd-grade").addEventListener("change", function (e) { rdFilters.minGrade = parseInt(e.target.value, 10) || 0; rdDeckIndex = 0; renderRaindrop(); });
+        document.getElementById("rd-deck-prev").addEventListener("click", function () { rdMoveDeck(-1); });
+        document.getElementById("rd-deck-next").addEventListener("click", function () { rdMoveDeck(1); });
+        document.getElementById("rd-deck-stage").addEventListener("click", function (e) {
+          var btn = e.target.closest("[data-rd-open]");
+          if (btn) openRaindropDetail(parseInt(btn.getAttribute("data-rd-open"), 10));
+        });
+        var shell = document.getElementById("rd-deck-shell");
+        shell.addEventListener("pointerdown", function (event) { rdPointerStart = event.clientX; });
+        shell.addEventListener("pointerup", function (event) {
+          if (rdPointerStart === null) return;
+          var distance = event.clientX - rdPointerStart;
+          rdPointerStart = null;
+          if (Math.abs(distance) > 50) rdMoveDeck(distance > 0 ? -1 : 1);
+        });
+        shell.addEventListener("pointercancel", function () { rdPointerStart = null; });
+        document.getElementById("rd-overlay").addEventListener("click", function (e) {
+          if (e.target.id === "rd-overlay") closeRaindropDetail();
         });
         document.addEventListener("keydown", function (e) {
-          if (e.key === "Enter" && e.target.matches && e.target.matches("[data-rd-open]")) { openRaindropDetail(parseInt(e.target.getAttribute("data-rd-open"), 10)); }
-          if (e.key === "Escape" && !document.getElementById("rd-overlay").hidden) { closeRaindropDetail(); }
-          if (rdDetailPos >= 0 && !document.getElementById("rd-overlay").hidden) {
-            if (e.key === "ArrowLeft" && rdDetailPos > 0) { rdDetailPos--; renderRaindropDetail(); }
-            if (e.key === "ArrowRight" && rdDetailPos < rdDetailList.length - 1) { rdDetailPos++; renderRaindropDetail(); }
+          var overlayOpen = !document.getElementById("rd-overlay").hidden;
+          var rdPanelOpen = !document.getElementById("panel-raindrop").hidden;
+          if (overlayOpen) {
+            if (e.key === "Escape") closeRaindropDetail();
+            else if (e.key === "ArrowLeft" && rdDetailPos > 0) { rdDetailPos--; renderRaindropDetail(); }
+            else if (e.key === "ArrowRight" && rdDetailPos < rdDetailList.length - 1) { rdDetailPos++; renderRaindropDetail(); }
+          } else if (rdPanelOpen && (e.target === document.body || (e.target.closest && e.target.closest(".rd-deck-shell")))) {
+            if (e.key === "ArrowLeft") { e.preventDefault(); rdMoveDeck(-1); }
+            else if (e.key === "ArrowRight") { e.preventDefault(); rdMoveDeck(1); }
+            else if (e.key === "Enter" && e.target.closest && e.target.closest("[data-rd-open]")) {
+              openRaindropDetail(parseInt(e.target.closest("[data-rd-open]").getAttribute("data-rd-open"), 10));
+            }
           }
         });
+        renderRaindrop();
       }
-
       function renderUtilities() {
         document.getElementById("bookmark-list").innerHTML = bookmarks.length ? bookmarks.map(function (item, i) { return utilityCardHtml(item, "bookmark", i); }).join("") : '<div class="empty-shelf"><strong>No bookmarks yet.</strong><p>Save a useful link here without running a full review.</p><button class="empty-action" type="button" data-empty-add="bookmark">Add this link</button></div>';
         document.getElementById("spitball-list").innerHTML = spitballs.length ? spitballs.map(function (item, i) { return utilityCardHtml(item, "spitball", i); }).join("") : '<div class="empty-shelf"><strong>No spitballs yet.</strong><p>Capture a raw idea now and decide what it becomes later.</p><button class="empty-action" type="button" data-empty-add="spitball">Capture an idea</button></div>';
