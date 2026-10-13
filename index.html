@@ -19,12 +19,12 @@
       --surface-solid: #36363b;
       --surface-2: rgba(106,96,112,.28);
       --ink: #f2f0ed;
-      --muted: #c0bbb5;
-      --line: rgba(242,240,237,.12);
+      --muted: #cbc6bf;
+      --line: rgba(242,240,237,.15);
       --line-strong: rgba(242,240,237,.24);
-      --accent: #524748;
-      --accent-strong: #6a6070;
-      --accent-soft: rgba(82,71,72,.38);
+      --accent: #b08a3e;
+      --accent-strong: #dcb26a;
+      --accent-soft: rgba(220,178,106,.18);
       --cyan: #b9afbE;
       --cyan-soft: rgba(106,96,112,.28);
       --try: #9aaa95;
@@ -94,7 +94,7 @@
       display: flex;
       align-items: center;
       gap: 20px;
-      background: rgba(21, 23, 27, .84);
+      background: rgba(21, 23, 27, .95);
       border: 1px solid var(--line);
       border-radius: 16px;
       box-shadow: var(--shadow-soft);
@@ -349,15 +349,15 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
-      background: var(--surface);
+      background: #232329;
       border: 1px solid var(--line);
       padding: 11px;
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
+      box-shadow: var(--shadow);
+      
+      -webkit-
       border-radius: 18px;
       position: sticky;
-      top: 86px;
+      top: 88px;
       z-index: 20;
       margin-bottom: 24px;
     }
@@ -440,7 +440,7 @@
       font-weight: 800;
     }
     .manage-btn:hover, .view-btn:hover { background: var(--surface-2); border-color: var(--line-strong); }
-    .manage-btn.primary { background: var(--accent); border-color: var(--accent-strong); color: #fff; box-shadow: 0 8px 20px rgba(82,71,72,.18); }
+    .manage-btn.primary { background: var(--accent); border-color: var(--accent-strong); color: #fff; box-shadow: 0 8px 20px rgba(176,138,62,.28); }
     .manage-btn.primary:hover { background: var(--accent-strong); }
     .view-switch {
       --segment-index: 0;
@@ -548,11 +548,9 @@
       gap: 12px;
       padding: 16px 18px;
       border-bottom: 1px solid var(--line);
-      background: rgba(39,42,47,.78);
-      backdrop-filter: blur(16px) saturate(125%);
-      -webkit-backdrop-filter: blur(16px) saturate(125%);
+      background: #272a30;
       position: sticky;
-      top: 158px;
+      top: 270px;
       z-index: 10;
     }
 
@@ -591,9 +589,9 @@
     }
 
     .card {
-      background: rgba(255,255,255,.048);
+      background: #222228;
       border: 1px solid var(--line);
-      box-shadow: inset 0 1px rgba(255,255,255,.045);
+      box-shadow: inset 0 1px rgba(255,255,255,.05), 0 10px 28px rgba(0, 0, 0, .28), 0 2px 8px rgba(0, 0, 0, .18);
       border-radius: 16px;
       padding: 20px;
       min-width: 0;
@@ -1151,7 +1149,7 @@
     .workspace-tabs {
       flex: 1;
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(8, minmax(0, 1fr));
       gap: 5px;
       margin: 0;
       padding: 0;
@@ -1169,7 +1167,7 @@
     }
     .workspace-tab span { margin-left: 5px; font-family: "IBM Plex Mono", monospace; }
     .workspace-tab:hover { color: var(--ink); background: rgba(255,255,255,.045); }
-    .workspace-tab.active { color: #fff; background: var(--accent); border-color: var(--accent-strong); box-shadow: 0 8px 20px rgba(82,71,72,.18); }
+    .workspace-tab.active { color: #fff; background: var(--accent); border-color: var(--accent-strong); box-shadow: 0 8px 20px rgba(176,138,62,.28); }
     .workspace-panel[hidden] { display: none !important; }
 
     .utility-head {
@@ -1354,7 +1352,7 @@
       .command-footer { justify-content: space-between; gap: 8px; }
     }
 
-    .workspace-tabs { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+    .workspace-tabs { grid-template-columns: repeat(8, minmax(0, 1fr)); }
     .board { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .lane[data-lane="inbox"] { border-color: rgba(106,96,112,.3); background: linear-gradient(180deg, var(--cyan-soft), rgba(8,10,12,.2) 120px); }
     .lane[data-lane="inbox"] .lane-mark { background: var(--cyan); box-shadow: 0 0 14px rgba(106,96,112,.38); }
@@ -1565,7 +1563,16 @@ body::before {
       .rd-deck-card.pos--2, .rd-deck-card.pos-2 { opacity:0; }
     }
 
-  </style>
+  
+    /* Trinity polish 2026-10-13 — mobile toolbar never sticks (487px tall + translucent = the jam Jon hit); anchor jumps clear the stuck stack */
+    .card, .lane { scroll-margin-top: 278px; }
+    @media (max-width: 1050px) { .card, .lane { scroll-margin-top: 270px; } }
+    @media (max-width: 720px) {
+      .toolbar { position: static; padding: 9px; gap: 8px; }
+      .toolbar .operator-help { display: none; }
+      .card, .lane { scroll-margin-top: 84px; }
+    }
+</style>
 </head>
 <body>
   <header class="top-nav" id="top-nav">
