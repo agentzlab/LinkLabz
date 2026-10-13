@@ -9,7 +9,7 @@
 
 **Live preview:** https://agentzlab.github.io/LinkLabz/
 
-![LinkLabz — Raindrop keeper deck, dark mode](assets/screenshot.png)
+![LinkLabz — Raindrop keeper deck, dark mode](assets/screenshot.png?v=20261013)
 
 ## What's inside
 
