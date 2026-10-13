@@ -9,7 +9,7 @@
 
 **Live preview:** https://agentzlab.github.io/LinkLabz/
 
-![LinkLabz — Raindrop keeper deck, dark mode](assets/screenshot.png?v=20261013)
+![LinkLabz — the review board, dark mode](assets/screenshot.png?v=202610131415)
 
 ## What's inside
 
@@ -23,6 +23,16 @@ LinkLabz is Jon's visual link review board — a single-page app for working thr
 - **Gradients** — the design-fuel pile
 - **Tools** — utilities
 - **Raindrop** — reviewed keepers from Jon's Raindrop sweeps, graded and filterable. Card deck → click for full detail → ← Prev / Next → through the deck → ← Deck to go home. Filters: text search, lane, source collection, status, minimum grade. New sweep batches append to the deck — it never becomes a dump.
+
+## Screenshots
+
+![Raindrop keeper deck](assets/screenshot-raindrop.png?v=202610131415)
+
+*The Raindrop keeper deck — graded cards; click through for the full verdict and harvest notes.*
+
+![LinkLabz at phone width](assets/screenshot-mobile.png?v=202610131415)
+
+*The board at phone width — the toolbar un-sticks on small screens so nothing jams.*
 
 ## Design language
 
@@ -44,7 +54,10 @@ Dark charcoal surfaces, warm gold accents, red top-edge on cards. No light mode 
 LinkLabz/
 ├── index.html            # the whole app
 ├── assets/
-│   └── screenshot.png    # dark-mode hero screenshot
+│   ├── screenshot.png            # dark-mode hero screenshot
+│   ├── screenshot-raindrop.png   # the Raindrop keeper deck
+│   ├── screenshot-mobile.png     # phone-width view
+│   └── og-image.jpg              # 1200x630 link-preview image
 ├── README.md
 └── .nojekyll             # Pages serves as-is
 ```
