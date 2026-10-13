@@ -94,12 +94,10 @@
       display: flex;
       align-items: center;
       gap: 20px;
-      background: rgba(21, 23, 27, .95);
+      background: #15171b;
       border: 1px solid var(--line);
       border-radius: 16px;
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(22px) saturate(135%);
-      -webkit-backdrop-filter: blur(22px) saturate(135%);
+      box-shadow: 0 -14px 0 0 #15171b, var(--shadow-soft);
     }
 
     .top-nav .brand-lockup { flex: 0 0 auto; }
@@ -352,9 +350,7 @@
       background: #232329;
       border: 1px solid var(--line);
       padding: 11px;
-      box-shadow: var(--shadow);
-      
-      -webkit-
+      box-shadow: 0 -14px 0 0 #232329, var(--shadow);
       border-radius: 18px;
       position: sticky;
       top: 88px;
@@ -440,7 +436,7 @@
       font-weight: 800;
     }
     .manage-btn:hover, .view-btn:hover { background: var(--surface-2); border-color: var(--line-strong); }
-    .manage-btn.primary { background: var(--accent); border-color: var(--accent-strong); color: #fff; box-shadow: 0 8px 20px rgba(176,138,62,.28); }
+    .manage-btn.primary { background: var(--accent); border-color: var(--accent-strong); color: #0d0d0d; box-shadow: 0 8px 20px rgba(176,138,62,.28); }
     .manage-btn.primary:hover { background: var(--accent-strong); }
     .view-switch {
       --segment-index: 0;
@@ -549,6 +545,7 @@
       padding: 16px 18px;
       border-bottom: 1px solid var(--line);
       background: #272a30;
+      box-shadow: 0 -14px 0 0 #272a30;
       position: sticky;
       top: 270px;
       z-index: 10;
@@ -852,7 +849,7 @@
 
     .details-btn { flex: 1; }
     .details-btn:hover, .source-btn:hover, .close-btn:hover, .icon-btn:hover { background: var(--surface-2); border-color: var(--line-strong); }
-    .brief-btn { flex: 1.25; background: var(--accent); color: #fff; border-color: var(--accent-strong); box-shadow: 0 9px 22px rgba(82,71,72,.18); }
+    .brief-btn { flex: 1.25; background: var(--accent); color: #0d0d0d; border-color: var(--accent-strong); box-shadow: 0 9px 22px rgba(82,71,72,.18); }
     .brief-btn:hover { background: var(--accent-strong); }
     .source-btn { padding: 0 14px; color: var(--ink); }
 
@@ -877,7 +874,7 @@
 
     .empty-state strong, .empty-shelf strong { display: block; color: var(--ink); font-size: 20px; margin-bottom: 6px; }
     .empty-state p, .empty-shelf p { margin: 0 auto 16px; max-width: 440px; color: var(--muted); }
-    .empty-action { min-height: 40px; padding: 0 15px; border: 1px solid var(--accent-strong); border-radius: 9px; background: var(--accent); color: #fff; cursor: pointer; font-weight: 800; }
+    .empty-action { min-height: 40px; padding: 0 15px; border: 1px solid var(--accent-strong); border-radius: 9px; background: var(--accent); color: #0d0d0d; cursor: pointer; font-weight: 800; }
     .empty-action:hover { background: var(--accent-strong); }
 
     .modal-backdrop {
@@ -1084,7 +1081,7 @@
     .recommendation { margin: 0; padding: 16px; border-radius: 12px; background: var(--cyan-soft); border: 1px solid rgba(106,96,112,.22); color: var(--ink); }
     .drawer-actions { display: flex; gap: 10px; margin: 30px -28px -28px; position: sticky; bottom: -28px; z-index: 9; padding: 18px 28px calc(28px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line-strong); background: rgba(25,28,32,.96); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
     .drawer-actions .brief-btn, .drawer-actions .source-btn { min-height: 48px; }
-    .drawer-actions .source-btn { flex: 1; background: var(--accent); border-color: var(--accent-strong); color: #fff; }
+    .drawer-actions .source-btn { flex: 1; background: var(--accent); border-color: var(--accent-strong); color: #0d0d0d; }
     .drawer-actions .source-btn:hover { background: var(--accent-strong); }
 
     .brief-box {
@@ -1167,7 +1164,7 @@
     }
     .workspace-tab span { margin-left: 5px; font-family: "IBM Plex Mono", monospace; }
     .workspace-tab:hover { color: var(--ink); background: rgba(255,255,255,.045); }
-    .workspace-tab.active { color: #fff; background: var(--accent); border-color: var(--accent-strong); box-shadow: 0 8px 20px rgba(176,138,62,.28); }
+    .workspace-tab.active { color: #0d0d0d; background: var(--accent); border-color: var(--accent-strong); box-shadow: 0 8px 20px rgba(176,138,62,.28); }
     .workspace-panel[hidden] { display: none !important; }
 
     .utility-head {
@@ -1422,7 +1419,7 @@
     .brand-mark::before { content: "Z"; font: 800 25px/1 "Manrope", sans-serif; letter-spacing: -.1em; transform: skew(-11deg); text-shadow: 2px 2px 0 #6A6070, -1px -1px 0 #5B6F57; }
     .top-nav, .managebar, .facet-popover, .command-palette, .drawer, .drawer-control-strip, .drawer-actions { background: rgba(243,241,238,.94); }
     .nav-scrim, .modal-backdrop, .command-backdrop { background: rgba(13,13,13,.6); }
-    .workspace-tab.active, .manage-btn.primary, .brief-btn, .empty-action, .drawer-actions .source-btn { color: #f7f5f2; box-shadow: 0 8px 20px rgba(13,13,13,.16); }
+    .workspace-tab.active, .manage-btn.primary, .brief-btn, .empty-action, .drawer-actions .source-btn { color: #0d0d0d; box-shadow: 0 8px 20px rgba(13,13,13,.16); }
     
     .signal-dot { box-shadow: 0 0 0 5px var(--accent-soft), 0 0 22px rgba(82,71,72,.38); }
     .lane[data-lane="inbox"] { border-color: rgba(106,96,112,.3); background: linear-gradient(180deg, var(--cyan-soft), rgba(54,54,59,.05) 120px); }
@@ -1492,6 +1489,7 @@ body::before {
     }
       .brand-mark { filter: none; }
       .top-nav, .managebar, .facet-popover, .command-palette, .drawer, .drawer-control-strip, .drawer-actions { background: rgba(28,28,28,.94); }
+      .top-nav { background: #15171b; } /* Trinity 2026-10-13: nav solid per Ravyn punch list — no card text ghosting through */
       .gradient-swatch { border-color: rgba(242,240,237,.14); }
       .hold-banner, .hold-stamp { color: var(--danger); }
     /* ===== Raindrop section — WorkshopLabz deck pattern ===== */
@@ -1567,7 +1565,7 @@ body::before {
     /* Trinity polish 2026-10-13 — mobile toolbar never sticks (487px tall + translucent = the jam Jon hit); anchor jumps clear the stuck stack */
     .card, .lane { scroll-margin-top: 278px; }
     @media (max-width: 1050px) { .card, .lane { scroll-margin-top: 270px; } }
-    @media (max-width: 720px) {
+    @media (max-width: 820px) {
       .toolbar { position: static; padding: 9px; gap: 8px; }
       .toolbar .operator-help { display: none; }
       .card, .lane { scroll-margin-top: 84px; }
