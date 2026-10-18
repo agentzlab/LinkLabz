@@ -30,7 +30,7 @@ LinkLabz is Jon's visual link review board — a single-page app for working thr
 
 *The Raindrop keeper deck — graded cards; click through for the full verdict and harvest notes.*
 
-![LinkLabz at phone width](assets/screenshot-mobile.png?v=202610180853)
+![LinkLabz at phone width](assets/screenshot-mobile.png?v=202610180858)
 
 *The board at phone width — the toolbar un-sticks on small screens so nothing jams.*
 
