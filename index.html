@@ -1703,8 +1703,11 @@ body::before {
     .rd-results, .rd-grid, .rd-list, .rd-deck-shell { overflow-anchor:none; }
     @media (max-width: 899px) {
       .rd-bar { top:70px; flex-wrap:nowrap; z-index:30; padding:5px 0; }
+      .rd-bar .rd-search-wrap { min-width:0; }
+      .rd-bar .search { width:100%; min-width:0; }
+      .rd-filters-btn { padding:8px 10px; }
       .rd-bar .search { min-height:44px; }
-      .rd-view-btn { font-size:0; min-width:40px; min-height:44px; padding:8px 9px; }
+      .rd-view-btn { font-size:0; min-width:36px; min-height:44px; padding:8px 7px; }
       .rd-view-btn::before { font-size:15px; line-height:1; }
       .rd-view-btn[data-rd-view="grid"]::before { content:"\25A6"; }
       .rd-view-btn[data-rd-view="list"]::before { content:"\2630"; }
