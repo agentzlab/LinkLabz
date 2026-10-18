@@ -1613,7 +1613,7 @@ body::before {
     <section class="overview" aria-labelledby="summary-title">
       <div class="summary">
         <div class="brand-line">
-          <div class="signal"><span class="signal-dot" aria-hidden="true"></span> Review queue · Sep 23, 2026</div>
+          <div class="signal"><span class="signal-dot" aria-hidden="true"></span> Link review board · Updated Oct 18, 2026</div>
         </div>
         <div>
           <h1 id="summary-title">Decide what to build—and what to borrow.</h1>
@@ -1621,10 +1621,10 @@ body::before {
         </div>
       </div>
       <div class="stats-panel" aria-label="Review summary">
-        <div class="stat"><span class="stat-value" id="total-stat">8</span><span class="stat-label">links reviewed</span></div>
-        <div class="stat"><span class="stat-value" id="try-stat">2</span><span class="stat-label">ready to test</span></div>
-        <div class="stat"><span class="stat-value" id="brief-stat">2</span><span class="stat-label">Cursor briefs</span></div>
-        <div class="stat"><span class="stat-value" id="parked-stat">4</span><span class="stat-label">parked for later</span></div>
+        <div class="stat"><span class="stat-value" id="total-stat">686</span><span class="stat-label">reviewed &amp; filed</span></div>
+        <div class="stat"><span class="stat-value" id="try-stat">6</span><span class="stat-label">ready to test</span></div>
+        <div class="stat"><span class="stat-value" id="brief-stat">124</span><span class="stat-label">best-of on the board</span></div>
+        <div class="stat"><span class="stat-value" id="parked-stat">10</span><span class="stat-label">top picks &middot; 5&#9733;</span></div>
       </div>
     </section>
 
@@ -3552,6 +3552,8 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
       /* ===== Raindrop section (Deckz pattern) ===== */
       var RAINDROP_LANES = ["Divi 5", "WordPress Themes", "Next.js", "Video Lab", "Image Lab", "3D Lab", "Prompting", "General UI"];
       /* Favorite 20 (2026-09-26) in rank order, then the remaining deck keepers. */
+      /* Pipeline totals, stamped by Trinity at each board publish: reviewed = live Trinity Reviewed count in Raindrop. */
+      var PIPELINE_STATS = { reviewed: 686, updated: "2026-10-18" };
       var RAINDROP_CARDS = [
         {title: "doseedo \u2014 session suite, DAW project conversion", url: "https://doseedo.com/", repo_url: "", source_collection: "iOS Bookmarks", lane: "General UI", grade: 5, status: "on-deck", date_added: "2026-09-26", verdict: "KEEP \u2014 closest existing product to his DAW-converter spitball", why: "DAW session conversion (Logic/Ableton/FL/Pro Tools/REAPER). Directly maps to Jon's parked FLP\u2192Studio One/Cubase converter spitball \u2014 study it to scope the gap.", harvest_notes: "Stealable pattern: whatever their session-translation does between DAWs (project/mixer/plugin-state mapping). Jon's parked spitball is an FLP\u2192Studio One/Cubase converter and doseedo is the closest existing product \u2014 study their format coverage and where they stop (no Cubase/Studio One per the 2026-09-18 OSS sweep) to scope the gap his converter would fill.", top20_rank: 1},
         {title: "Taste Skill \u2014 anti-slop frontend framework for AI agents", url: "https://www.tasteskill.dev/", repo_url: "", source_collection: "iOS Bookmarks", lane: "General UI", grade: 5, status: "on-deck", date_added: "2026-09-26", verdict: "KEEP \u2014 this IS his skill-pack concept, open-sourced", why: "SKILL.md-based design-taste skills for Cursor, Claude Code, Codex and more. Open source. This is the exact 'skill pack' idea he's building for lane 2 \u2014 study and cherry-pick.", harvest_notes: "Stealable pattern: the brief-inference step (reads industry/audience/mood before generating) and the hard pre-flight check every agent must pass before shipping. Both port directly into his lane-2 skill pack. v2 is experimental but the install name is stable; pin v1 if v2 breaks.", top20_rank: 2},
@@ -4080,11 +4082,11 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
       }
 
       function updateStats() {
-        var counts = reviews.reduce(function (acc, item) { acc[item.verdict] = (acc[item.verdict] || 0) + 1; acc.briefs += item.brief ? 1 : 0; return acc; }, { inbox:0, try:0, parked:0, skipped:0, briefs:0 });
-        document.getElementById("total-stat").textContent = reviews.length;
-        document.getElementById("try-stat").textContent = counts.try;
-        document.getElementById("brief-stat").textContent = counts.briefs;
-        document.getElementById("parked-stat").textContent = counts.parked;
+        var deck = (typeof RAINDROP_CARDS !== "undefined") ? RAINDROP_CARDS : [];
+        document.getElementById("total-stat").textContent = (typeof PIPELINE_STATS !== "undefined") ? PIPELINE_STATS.reviewed : deck.length;
+        document.getElementById("try-stat").textContent = deck.filter(function (c) { return c.status === "test-queued"; }).length;
+        document.getElementById("brief-stat").textContent = deck.length;
+        document.getElementById("parked-stat").textContent = deck.filter(function (c) { return c.grade === 5; }).length;
       }
 
       function render() {
