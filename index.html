@@ -1690,6 +1690,28 @@ body::before {
       .rd-grid { grid-template-columns:1fr; }
       .rd-opt { min-height:44px; font-size:14px; }
     }
+
+    /* === Deck v2 follow-up fixes (2026-10-18, Ravyn review S1-S7 + N1/N2/N3/N6) === */
+    .rd-active-chip { position:relative; z-index:1; }
+    .rd-active-chip button { position:relative; }
+    .rd-active-chip button::after { content:""; position:absolute; inset:-11px; }
+    @media (max-width: 899px) {
+      .rd-active-chip button { width:44px; height:44px; margin:-11px -11px -11px 0; }
+      .rd-active-chip button::after { display:none; }
+    }
+    .rd-gcard, .rd-lrow { scroll-margin-top:96px; }
+    .rd-results, .rd-grid, .rd-list, .rd-deck-shell { overflow-anchor:none; }
+    @media (max-width: 899px) {
+      .rd-bar { top:70px; flex-wrap:nowrap; z-index:30; padding:5px 0; }
+      .rd-bar .search { min-height:44px; }
+      .rd-view-btn { font-size:0; min-width:40px; min-height:44px; padding:8px 9px; }
+      .rd-view-btn::before { font-size:15px; line-height:1; }
+      .rd-view-btn[data-rd-view="grid"]::before { content:"\25A6"; }
+      .rd-view-btn[data-rd-view="list"]::before { content:"\2630"; }
+      .rd-view-btn[data-rd-view="fan"]::before { content:"\2750"; }
+      .rd-l-status { display:none; }
+      .rd-gcard, .rd-lrow { scroll-margin-top:140px; }
+    }
 </style>
 </head>
 <body>
@@ -3847,7 +3869,7 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
       var RD_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
       function rdStars(g) { var s = ""; for (var i = 1; i <= 5; i++) s += i <= g ? "★" : "☆"; return s; }
-      function rdNorm(s) { return String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/&/g, " and ").toLowerCase(); }
+      function rdNorm(s) { return String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/&/g, " and ").replace(/·/g, " ").replace(/\s+/g, " ").toLowerCase(); }
       var rdHayCache = {};
       function rdHay(c) {
         var i = RAINDROP_CARDS.indexOf(c);
@@ -3877,6 +3899,8 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
       function rdPasses(c, idx, exceptFacet) {
         if (rdFilters.preset === "top20" && !c.top20_rank) return false;
         if (rdFilters.preset === "latest" && !rdLatestSet()[idx]) return false;
+        if (rdFilters.preset === "ready" && c.status !== "test-queued") return false;
+        if (rdFilters.preset === "five" && c.grade < 5) return false;
         if (exceptFacet !== "status" && rdFilters.status.length && rdFilters.status.indexOf(c.status) === -1) return false;
         if (exceptFacet !== "goesTo" && rdFilters.goesTo.length && rdFilters.goesTo.indexOf(c.goes_to || "") === -1) return false;
         if (exceptFacet !== "lane" && rdFilters.lane.length && rdFilters.lane.indexOf(c.lane) === -1) return false;
@@ -3941,8 +3965,8 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         return '<button class="rd-deck-card" type="button" data-rd-open="' + RAINDROP_CARDS.indexOf(c) + '" aria-label="Open ' + escapeHtml(c.title) + ' details">' +
           '<span class="rd-card-top"><span class="rd-card-category">' + escapeHtml(c.lane) + '<span class="rd-card-stars">' + rdStars(c.grade) + '</span></span><span class="rd-card-number">' + n + "</span></span>" +
           '<span class="rd-card-body"><span><span class="rd-card-title"><strong>' + escapeHtml(c.title) + "</strong></span>" +
-          '<span class="rd-card-summary">' + escapeHtml(c.verdict + " — " + c.why) + "</span></span>" +
-          '<span class="rd-card-bottom"><span class="rd-status' + (c.status === "lead" ? " lead" : "") + '">' + escapeHtml(c.status) + '</span><span class="rd-open-label">Open →</span></span></span></button>';
+          '<span class="rd-card-summary">' + escapeHtml(rdStripVerdict(c.verdict) + " — " + c.why) + "</span></span>" +
+          '<span class="rd-card-bottom">' + rdStatusChip(c) + '<span class="rd-open-label">Open →</span></span></span></button>';
       }
       function rdFacetValues(f) {
         var seen = {}, vals = [];
@@ -3974,7 +3998,6 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
             var at = arr.indexOf(v);
             if (box.checked && at === -1) arr.push(v);
             if (!box.checked && at !== -1) arr.splice(at, 1);
-            rdFilters.preset = null;
             rdDeckIndex = 0;
             renderRaindrop();
           });
@@ -4114,15 +4137,46 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         var sortM = document.getElementById("rd-sort-m"); if (sortM) sortM.value = rdFilters.sort;
         rdSyncHash();
       }
+      function rdFindCardEl(idx) {
+        var box = rdView === "grid" ? document.getElementById("rd-grid") : rdView === "list" ? document.getElementById("rd-list") : document.getElementById("rd-deck-stage");
+        return box ? box.querySelector('[data-rd-open="' + idx + '"]') : null;
+      }
+      function rdCaptureViewportAnchor() {
+        var box = rdView === "grid" ? document.getElementById("rd-grid") : rdView === "list" ? document.getElementById("rd-list") : null;
+        if (!box || box.hidden) return;
+        var els = box.querySelectorAll("[data-rd-open]");
+        var firstPartial = null;
+        for (var i = 0; i < els.length; i++) {
+          var r = els[i].getBoundingClientRect();
+          if (r.bottom > 90 && r.top < window.innerHeight) {
+            if (!firstPartial) firstPartial = els[i];
+            if (r.top >= 90 && r.bottom <= window.innerHeight) { rdAnchorIdx = parseInt(els[i].getAttribute("data-rd-open"), 10); return; }
+          }
+        }
+        if (firstPartial) rdAnchorIdx = parseInt(firstPartial.getAttribute("data-rd-open"), 10);
+      }
       function rdSetView(v, anchorScroll) {
         if (["grid", "list", "fan"].indexOf(v) === -1) return;
         if (rdView === "fan" && rdVisibleCards.length) rdAnchorIdx = RAINDROP_CARDS.indexOf(rdVisibleCards[rdDeckIndex]);
+        else rdCaptureViewportAnchor();
         rdView = v;
         try { localStorage.setItem("ll.rd.view", v); } catch (e) {}
         renderRaindrop();
-        if (anchorScroll && rdView !== "fan" && rdAnchorIdx >= 0) {
-          var el = document.querySelector('[data-rd-open="' + rdAnchorIdx + '"]');
-          if (el) el.scrollIntoView({ block: "nearest" });
+        if (anchorScroll && rdAnchorIdx >= 0) {
+          var idx = rdAnchorIdx;
+          var scrollToCard = function () {
+            var el = rdFindCardEl(idx);
+            if (!el) return;
+            var margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+            var y = el.getBoundingClientRect().top + window.scrollY - margin;
+            try { window.scrollTo({ top: Math.max(0, y), behavior: "instant" }); }
+            catch (err) { window.scrollTo(0, Math.max(0, y)); }
+          };
+          requestAnimationFrame(function () { requestAnimationFrame(scrollToCard); });
+          setTimeout(function () {
+            var el = rdFindCardEl(idx);
+            if (el && Math.abs(el.getBoundingClientRect().top - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0)) > 48) scrollToCard();
+          }, 180);
         }
       }
       function rdMoveDeck(amount) {
@@ -4141,11 +4195,7 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         renderRaindrop();
       }
       function rdApplyPreset(name) {
-        if (rdFilters.preset === name) { rdFilters.preset = null; if (name === "ready") rdFilters.status = []; if (name === "five") rdFilters.gradeMin = 0; rdDeckIndex = 0; renderRaindrop(); return; }
-        rdFilters.preset = name;
-        if (name === "ready") { rdFilters.status = ["test-queued"]; rdFilters.sort = "newest"; }
-        if (name === "five") rdFilters.gradeMin = 5;
-        if (name === "latest") rdFilters.sort = "newest";
+        rdFilters.preset = rdFilters.preset === name ? null : name;
         rdDeckIndex = 0;
         renderRaindrop();
       }
@@ -4176,11 +4226,7 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         });
         if (params.grade) rdFilters.gradeMin = parseFloat(params.grade) || 0;
         if (params.sort) rdFilters.sort = params.sort;
-        if (params.preset) {
-          rdFilters.preset = params.preset;
-          if (params.preset === "ready" && !rdFilters.status.length) rdFilters.status = ["test-queued"];
-          if (params.preset === "five" && !rdFilters.gradeMin) rdFilters.gradeMin = 5;
-        }
+        if (params.preset) rdFilters.preset = params.preset;
         rdDeckIndex = 0;
         showWorkspace("raindrop");
         renderRaindrop();
@@ -4192,7 +4238,9 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         rdFilters = { q: "", status: [], goesTo: [], lane: [], frame: [], collection: [], gradeMin: 0, sort: "rank", preset: null };
         var s = document.getElementById("rd-search"); if (s) s.value = "";
       }
+      var rdDetailIdx = -1;
       function openRaindropDetail(idx) {
+        rdDetailIdx = idx;
         rdDetailList = rdFiltered();
         rdDetailPos = rdDetailList.findIndex(function (c) { return RAINDROP_CARDS.indexOf(c) === idx; });
         if (rdDetailPos < 0) { rdDetailList = [RAINDROP_CARDS[idx]]; rdDetailPos = 0; }
@@ -4231,8 +4279,15 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
       function closeRaindropDetail() {
         document.getElementById("rd-overlay").hidden = true;
         document.body.style.overflow = "";
+        var idx = rdDetailIdx;
+        if (idx >= 0 && rdVisibleCards.length) {
+          var pos = rdVisibleCards.findIndex(function (c) { return RAINDROP_CARDS.indexOf(c) === idx; });
+          if (pos !== -1) rdDeckIndex = pos;
+        }
         renderRaindrop();
-        if (rdLastFocus && rdLastFocus.isConnected) rdLastFocus.focus();
+        var el = idx >= 0 ? rdFindCardEl(idx) : null;
+        if (el) el.focus();
+        else if (rdLastFocus && rdLastFocus.isConnected) rdLastFocus.focus();
       }
       function rdClosePop() {
         var pop = document.getElementById("rd-pop");
@@ -4288,7 +4343,7 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         search.addEventListener("input", function (e) {
           clearTimeout(rdSearchTimer);
           var v = e.target.value;
-          rdSearchTimer = setTimeout(function () { rdFilters.q = v; rdFilters.preset = null; rdDeckIndex = 0; renderRaindrop(); }, 120);
+          rdSearchTimer = setTimeout(function () { rdFilters.q = v; rdDeckIndex = 0; renderRaindrop(); }, 120);
         });
         document.querySelectorAll("[data-rd-facet]").forEach(function (btn) {
           btn.addEventListener("click", function () { rdOpenPop(btn.getAttribute("data-rd-facet"), btn); });
@@ -4311,7 +4366,7 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
           if (btn) btn.focus();
         });
         document.querySelectorAll("[data-rd-grade]").forEach(function (b) {
-          b.addEventListener("click", function () { rdFilters.gradeMin = parseFloat(b.getAttribute("data-rd-grade")) || 0; rdFilters.preset = null; rdDeckIndex = 0; renderRaindrop(); });
+          b.addEventListener("click", function () { rdFilters.gradeMin = parseFloat(b.getAttribute("data-rd-grade")) || 0; rdDeckIndex = 0; renderRaindrop(); });
         });
         document.querySelectorAll("[data-rd-preset]").forEach(function (b) {
           b.addEventListener("click", function () { rdApplyPreset(b.getAttribute("data-rd-preset")); });
@@ -4319,8 +4374,8 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         document.querySelectorAll("[data-rd-view]").forEach(function (b) {
           b.addEventListener("click", function () { rdSetView(b.getAttribute("data-rd-view"), true); });
         });
-        document.getElementById("rd-sort").addEventListener("change", function (e) { rdFilters.sort = e.target.value; rdFilters.preset = null; rdDeckIndex = 0; renderRaindrop(); });
-        document.getElementById("rd-sort-m").addEventListener("change", function (e) { rdFilters.sort = e.target.value; rdFilters.preset = null; rdDeckIndex = 0; renderRaindrop(); });
+        document.getElementById("rd-sort").addEventListener("change", function (e) { rdFilters.sort = e.target.value; rdDeckIndex = 0; renderRaindrop(); });
+        document.getElementById("rd-sort-m").addEventListener("change", function (e) { rdFilters.sort = e.target.value; rdDeckIndex = 0; renderRaindrop(); });
         document.getElementById("rd-active").addEventListener("click", function (e) { rdChipClear(e); });
         document.getElementById("rd-empty-actions").addEventListener("click", function (e) { rdChipClear(e); });
         document.getElementById("rd-results").addEventListener("click", function (e) {
@@ -4359,6 +4414,15 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         shell.addEventListener("pointercancel", function () { rdPointerStart = null; });
         document.getElementById("rd-overlay").addEventListener("click", function (e) {
           if (e.target.id === "rd-overlay") closeRaindropDetail();
+        });
+        document.getElementById("rd-overlay").addEventListener("keydown", function (e) {
+          if (e.key !== "Tab") return;
+          var box = document.getElementById("rd-detail");
+          var focusables = Array.prototype.slice.call(box.querySelectorAll("button, a[href]")).filter(function (n) { return !n.disabled && n.offsetParent !== null; });
+          if (!focusables.length) return;
+          var first = focusables[0], last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         });
         var tryStat = document.getElementById("try-stat");
         if (tryStat) {
@@ -4411,14 +4475,13 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         var what = btn.getAttribute("data-rd-clear");
         if (what === "all") { rdClearFilters(); return; }
         if (what === "preset") { rdFilters.preset = null; }
-        else if (what === "grade") { rdFilters.gradeMin = 0; rdFilters.preset = null; }
+        else if (what === "grade") { rdFilters.gradeMin = 0; }
         else {
           var kv = what.split(":");
           var key = kv[0], v = kv.slice(1).join(":");
           var arr = rdFilters[key];
           var at = arr.indexOf(v);
           if (at !== -1) arr.splice(at, 1);
-          rdFilters.preset = null;
         }
         rdDeckIndex = 0;
         renderRaindrop();
