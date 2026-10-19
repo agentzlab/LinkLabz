@@ -76,7 +76,7 @@
       z-index: 0;
       pointer-events: none;
       background:
-        radial-gradient(1100px 620px at 10% -6%, rgba(232,182,76,.17), transparent 60%),
+        radial-gradient(1100px 620px at 10% -6%, rgba(220,178,106,.17), transparent 60%),
         radial-gradient(1250px 900px at 50% 118%, rgba(82,71,72,.30), transparent 60%),
         linear-gradient(168deg, #151518 0%, #202025 44%, #101012 100%);
     }
@@ -1494,7 +1494,7 @@ body::before {
       z-index: 0;
       pointer-events: none;
       background:
-        radial-gradient(1100px 620px at 10% -6%, rgba(232,182,76,.17), transparent 60%),
+        radial-gradient(1100px 620px at 10% -6%, rgba(220,178,106,.17), transparent 60%),
         radial-gradient(1250px 900px at 50% 118%, rgba(82,71,72,.30), transparent 60%),
         linear-gradient(168deg, #151518 0%, #202025 44%, #101012 100%);
     }
@@ -1736,6 +1736,14 @@ body::before {
     /* X1: unbreakable slash-joined words must never widen the phone grid or clip the detail */
     @media (max-width:640px) { .rd-grid { grid-template-columns:minmax(0,1fr); } }
     .rd-g-title, .rd-g-verdict, .rd-detail h2, .rd-detail p, .rd-detail .rd-verdict { overflow-wrap:anywhere; }
+    /* Mini-pass T2: compact phone hero (Judge #13) — hero + stats stop eating the first screen */
+    @media (max-width:720px) {
+      .summary { min-height:0; padding:20px 18px; }
+      h1 { font-size:30px; margin:16px 0 10px; }
+      .summary p { font-size:14px; padding-right:0; }
+      .stat { min-height:74px; padding:12px 14px; }
+      .stat-value { font-size:25px; }
+    }
     /* M3: no legacy violet halo on deck inputs/selects (board tokens untouched) */
     #panel-raindrop .search:focus, #panel-raindrop .select-control:focus, #rd-sheet .search:focus, #rd-sheet .select-control:focus { border-color:var(--line-strong); box-shadow:none; }
     /* P2 popovers: capped height + internal scroll; JS flips when the fold is close */
@@ -4446,6 +4454,10 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
           var v = e.target.value;
           rdSearchTimer = setTimeout(function () { rdFilters.q = v; rdDeckIndex = 0; renderRaindrop(); }, 120);
         });
+        var rdSmallMq = window.matchMedia("(max-width: 720px)");
+        var rdPh = function () { search.placeholder = rdSmallMq.matches ? "Search" : "Search title, verdict, or harvest notes\u2026"; };
+        if (rdSmallMq.addEventListener) rdSmallMq.addEventListener("change", rdPh); else if (rdSmallMq.addListener) rdSmallMq.addListener(rdPh);
+        rdPh();
         document.querySelectorAll("[data-rd-facet]").forEach(function (btn) {
           btn.addEventListener("click", function () { rdOpenPop(btn.getAttribute("data-rd-facet"), btn); });
         });
