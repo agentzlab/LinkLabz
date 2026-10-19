@@ -77,7 +77,6 @@
       pointer-events: none;
       background:
         radial-gradient(1100px 620px at 10% -6%, rgba(232,182,76,.17), transparent 60%),
-        radial-gradient(950px 720px at 97% 24%, rgba(106,96,112,.24), transparent 62%),
         radial-gradient(1250px 900px at 50% 118%, rgba(82,71,72,.30), transparent 60%),
         linear-gradient(168deg, #151518 0%, #202025 44%, #101012 100%);
     }
@@ -433,7 +432,7 @@
     .search::placeholder { color: var(--muted); opacity: .85; }
 
     .filter:focus-visible, .icon-btn:focus-visible, .brief-btn:focus-visible, .details-btn:focus-visible, .close-btn:focus-visible, .source-btn:focus-visible, .manage-btn:focus-visible, .delete-btn:focus-visible, .view-btn:focus-visible, .status-control:focus-visible, .facet-button:focus-visible, .facet-clear-all:focus-visible, .empty-action:focus-visible {
-      outline: 3px solid var(--accent-soft);
+      outline: 2px solid var(--accent-strong);
       outline-offset: 2px;
     }
 
@@ -599,7 +598,7 @@
     }
 
     .card {
-      background: #222228;
+      background: #222222;
       border: 1px solid var(--line);
       box-shadow: inset 0 1px rgba(255,255,255,.05), 0 10px 28px rgba(0, 0, 0, .28), 0 2px 8px rgba(0, 0, 0, .18);
       border-radius: 16px;
@@ -1496,7 +1495,6 @@ body::before {
       pointer-events: none;
       background:
         radial-gradient(1100px 620px at 10% -6%, rgba(232,182,76,.17), transparent 60%),
-        radial-gradient(950px 720px at 97% 24%, rgba(106,96,112,.24), transparent 62%),
         radial-gradient(1250px 900px at 50% 118%, rgba(82,71,72,.30), transparent 60%),
         linear-gradient(168deg, #151518 0%, #202025 44%, #101012 100%);
     }
@@ -1509,17 +1507,17 @@ body::before {
     .rd-toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:18px 0 20px; }
     .rd-toolbar .search-wrap { flex:1 1 240px; }
     .rd-toolbar .select-wrap { flex:0 1 auto; }
-    .rd-top20-toggle { padding:9px 14px; color:var(--muted); background:transparent; border:1px solid var(--line-strong); border-radius:999px; font-size:12.5px; cursor:pointer; }
-    .rd-top20-toggle[aria-pressed="true"] { color:#0d0d0d; background:#e8b64c; border-color:#e8b64c; font-weight:600; }
-    .rd-chip.top20 { color:#0d0d0d; background:#e8b64c; border-color:#e8b64c; }
+    .rd-top20-toggle { padding:9px 14px; color:var(--muted); background:transparent; border:1px solid var(--line-strong); border-radius:999px; font-size:13px; cursor:pointer; }
+    .rd-top20-toggle[aria-pressed="true"] { color:#0d0d0d; background:#dcb26a; border-color:#dcb26a; font-weight:600; }
+    .rd-chip.top20 { color:#0d0d0d; background:#dcb26a; border-color:#dcb26a; }
     .rd-deck-shell { position:relative; min-height:475px; overflow:hidden; background:linear-gradient(180deg, rgba(13,13,13,.86), rgba(28,28,28,.42)); border:1px solid var(--line-strong); border-radius:14px; perspective:1400px; touch-action:pan-y; }
     .rd-deck-header { position:absolute; z-index:12; top:18px; right:20px; left:20px; display:flex; align-items:center; justify-content:space-between; gap:16px; pointer-events:none; }
-    .rd-deck-count { color:var(--muted); font:500 11px/1.2 "IBM Plex Mono", monospace; }
+    .rd-deck-count { color:var(--muted); font:500 12px/1.2 "IBM Plex Mono", monospace; }
     .rd-deck-hint { color:var(--muted); font-size:12px; }
     .rd-deck-stage { position:absolute; inset:58px 0 70px; transform-style:preserve-3d; }
     .rd-deck-card { position:absolute; top:50%; left:50%; width:338px; min-height:314px; margin:0; padding:0; overflow:hidden; text-align:left; color:var(--ink); background:var(--surface-solid); border:1px solid var(--line-strong); border-radius:12px; box-shadow:0 22px 52px rgba(0,0,0,.44); cursor:pointer; font:inherit; transform:translate(-50%,-50%) scale(.62); opacity:0; pointer-events:none; transition:transform .42s cubic-bezier(.2,.7,.2,1), opacity .3s ease, filter .3s ease, border-color .3s ease; transform-style:preserve-3d; }
     .rd-deck-card:hover { border-color:var(--accent-strong); }
-    .rd-deck-card:focus-visible { outline:2px solid var(--accent-strong); outline-offset:4px; }
+    .rd-deck-card:focus-visible { outline:2px solid var(--accent-strong); outline-offset:2px; }
     .rd-deck-card.pos-0 { z-index:6; opacity:1; pointer-events:auto; border-color:rgba(242,240,237,.45); transform:translate(-50%,-50%) translateZ(70px) rotateY(0deg) scale(1); }
     .rd-deck-card.pos--1 { z-index:4; opacity:.74; pointer-events:auto; filter:saturate(.72) brightness(.78); transform:translate(calc(-50% - 278px),-50%) translateZ(-50px) rotateY(34deg) scale(.82); }
     .rd-deck-card.pos-1 { z-index:4; opacity:.74; pointer-events:auto; filter:saturate(.72) brightness(.78); transform:translate(calc(-50% + 278px),-50%) translateZ(-50px) rotateY(-34deg) scale(.82); }
@@ -1527,30 +1525,30 @@ body::before {
     .rd-deck-card.pos-2 { z-index:2; opacity:.28; transform:translate(calc(-50% + 478px),-50%) translateZ(-150px) rotateY(-44deg) scale(.66); }
     .rd-card-top { position:relative; display:block; height:104px; overflow:hidden; padding:18px 20px; background:rgba(13,13,13,.55); border-bottom:1px solid var(--line); }
     .rd-card-number { position:absolute; right:10px; bottom:-18px; color:rgba(242,240,237,.09); font:600 102px/1 "IBM Plex Mono", monospace; letter-spacing:-.1em; }
-    .rd-card-category { position:relative; z-index:1; color:#f0d9a8; font:600 11px/1.5 "IBM Plex Mono", monospace; letter-spacing:.08em; text-transform:uppercase; }
-    .rd-card-stars { display:block; margin-top:6px; color:#e8b64c; letter-spacing:2px; font-size:12px; }
+    .rd-card-category { position:relative; z-index:1; color:#f0d9a8; font:600 12px/1.5 "IBM Plex Mono", monospace; letter-spacing:.08em; text-transform:uppercase; }
+    .rd-card-stars { display:block; margin-top:6px; color:#dcb26a; letter-spacing:2px; font-size:12px; }
     .rd-card-body { display:flex; min-height:210px; flex-direction:column; justify-content:space-between; padding:22px 20px 19px; }
     .rd-card-title { display:block; }
     .rd-card-title strong { display:block; font-size:23px; line-height:1.12; letter-spacing:-.01em; }
     .rd-card-summary { display:block; margin:11px 0 20px; color:var(--muted); font-size:13px; line-height:1.48; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
     .rd-card-bottom { display:flex; align-items:center; justify-content:space-between; gap:14px; padding-top:14px; border-top:1px solid var(--line); }
-    .rd-status { display:inline-flex; align-items:center; gap:7px; color:#a9e6b8; font:600 10px/1.2 "IBM Plex Mono", monospace; letter-spacing:.02em; text-transform:uppercase; }
+    .rd-status { display:inline-flex; align-items:center; gap:7px; color:#9aaa95; font:600 12px/1.2 "IBM Plex Mono", monospace; letter-spacing:.02em; text-transform:uppercase; }
     .rd-status::before { content:""; width:7px; height:7px; flex:none; background:currentColor; border-radius:50%; }
-    .rd-status.lead { color:#f2b8b0; }
-    .rd-open-label { color:var(--ink); font:600 10px/1 "IBM Plex Mono", monospace; text-transform:uppercase; letter-spacing:.07em; }
+    .rd-status.lead { color:#dcb26a; }
+    .rd-open-label { color:var(--ink); font:600 12px/1 "IBM Plex Mono", monospace; text-transform:uppercase; letter-spacing:.07em; }
     .rd-deck-controls { position:absolute; z-index:15; right:0; bottom:0; left:0; display:flex; align-items:center; justify-content:center; gap:14px; padding:13px 18px; background:rgba(13,13,13,.78); border-top:1px solid var(--line); }
     .rd-deck-arrow { display:inline-flex; align-items:center; justify-content:center; min-width:42px; min-height:42px; padding:0 13px; color:var(--ink); background:var(--surface-2); border:1px solid var(--line-strong); border-radius:8px; cursor:pointer; font-size:15px; }
     .rd-deck-arrow:hover { border-color:var(--accent-strong); }
     .rd-deck-arrow:disabled { opacity:.35; cursor:default; }
     .rd-deck-dots { display:flex; align-items:center; justify-content:center; gap:7px; min-width:94px; }
     .rd-deck-dot { width:7px; height:7px; padding:0; background:var(--line-strong); border:0; border-radius:50%; cursor:pointer; }
-    .rd-deck-dot[aria-current="true"] { width:24px; background:#e8b64c; border-radius:5px; }
+    .rd-deck-dot[aria-current="true"] { width:24px; background:#dcb26a; border-radius:5px; }
     .rd-empty { padding:54px 24px; color:var(--muted); text-align:center; background:var(--surface-solid); border:1px solid var(--line-strong); border-radius:14px; margin-top:16px; }
-    .rd-chip { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:3px 9px; border-radius:999px; border:1px solid var(--line-strong); color:var(--muted); }
+    .rd-chip { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:3px 9px; border-radius:999px; border:1px solid var(--line-strong); color:var(--muted); }
     .rd-chip.lane { color:#f0d9a8; border-color:rgba(232,182,76,.45); }
-    .rd-chip.on-deck { color:#a9e6b8; border-color:rgba(120,200,140,.4); }
-    .rd-chip.lead { color:#f2b8b0; border-color:rgba(200,64,52,.5); }
-    .rd-stars { color:#e8b64c; letter-spacing:2px; font-size:13px; }
+    .rd-chip.on-deck { color:#9aaa95; border-color:rgba(154,170,149,.45); }
+    .rd-chip.lead { color:#dcb26a; border-color:rgba(220,178,106,.45); }
+    .rd-stars { color:#dcb26a; letter-spacing:2px; font-size:13px; }
     .rd-verdict { font-weight:700; font-size:13px; margin:8px 0 4px; }
     .rd-overlay { position:fixed; inset:0; z-index:120; background:rgba(8,8,10,.78); backdrop-filter:blur(6px); display:flex; align-items:flex-start; justify-content:center; padding:48px 16px; overflow-y:auto; }
     .rd-overlay[hidden] { display:none; }
@@ -1589,66 +1587,66 @@ body::before {
     .rd-bar { position:relative; display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:18px 0 10px; }
     .rd-bar .rd-search-wrap { flex:1 1 240px; display:flex; align-items:center; gap:8px; }
     .rd-facets { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-    .rd-facet-btn, .rd-filters-btn { min-height:38px; padding:8px 13px; color:var(--ink); background:rgba(255,255,255,.045); border:1px solid var(--line-strong); border-radius:999px; font:600 12.5px "Manrope",sans-serif; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
+    .rd-facet-btn, .rd-filters-btn { min-height:38px; padding:8px 13px; color:var(--ink); background:rgba(255,255,255,.045); border:1px solid var(--line-strong); border-radius:999px; font:600 13px "Manrope",sans-serif; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
     .rd-facet-btn:hover, .rd-filters-btn:hover { border-color:var(--accent); }
     .rd-facet-btn[aria-expanded="true"] { border-color:var(--accent); color:var(--accent-strong); }
-    .rd-facet-n, .rd-filters-n { min-width:18px; height:18px; padding:0 5px; border-radius:999px; background:var(--accent); color:#0d0d0d; font:600 11px/18px "IBM Plex Mono",monospace; text-align:center; }
-    .rd-caret { color:var(--muted); font-size:10px; }
+    .rd-facet-n, .rd-filters-n { min-width:18px; height:18px; padding:0 5px; border-radius:999px; background:var(--accent); color:#0d0d0d; font:600 12px/18px "IBM Plex Mono",monospace; text-align:center; }
+    .rd-caret { color:var(--muted); font-size:12px; }
     .rd-filters-btn { display:none; }
     .rd-sort-wrap { flex:0 1 auto; }
     .rd-view-switch { display:inline-flex; margin-left:auto; background:rgba(255,255,255,.045); border:1px solid var(--line-strong); border-radius:999px; padding:3px; gap:2px; }
-    .rd-view-btn { min-height:32px; padding:6px 14px; border:0; border-radius:999px; background:transparent; color:var(--muted); font:600 12.5px "Manrope",sans-serif; cursor:pointer; }
+    .rd-view-btn { min-height:32px; padding:6px 14px; border:0; border-radius:999px; background:transparent; color:var(--muted); font:600 13px "Manrope",sans-serif; cursor:pointer; }
     .rd-view-btn.active { background:var(--accent); color:#0d0d0d; }
-    .rd-pop { position:absolute; z-index:60; top:calc(100% + 6px); width:290px; max-width:calc(100vw - 32px); background:#222228; border:1px solid var(--line-strong); border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,.55); padding:10px; }
+    .rd-pop { position:absolute; z-index:60; top:calc(100% + 6px); width:290px; max-width:calc(100vw - 32px); background:#222222; border:1px solid var(--line-strong); border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,.55); padding:10px; }
     .rd-facet-panel .rd-facet-search { width:100%; margin-bottom:8px; }
     .rd-facet-opts { max-height:264px; overflow:auto; display:flex; flex-direction:column; gap:2px; }
-    .rd-opt { display:flex; align-items:center; gap:9px; min-height:36px; padding:6px 8px; border-radius:9px; cursor:pointer; font-size:13.5px; color:var(--ink); }
+    .rd-opt { display:flex; align-items:center; gap:9px; min-height:36px; padding:6px 8px; border-radius:9px; cursor:pointer; font-size:14px; color:var(--ink); }
     .rd-opt:hover { background:rgba(255,255,255,.05); }
     .rd-opt input { accent-color:var(--accent); width:16px; height:16px; flex:0 0 auto; }
-    .rd-opt .rd-opt-n { margin-left:auto; color:var(--muted); font:500 11px "IBM Plex Mono",monospace; }
+    .rd-opt .rd-opt-n { margin-left:auto; color:var(--muted); font:500 12px "IBM Plex Mono",monospace; }
     .rd-opt.zero { opacity:.42; }
     .rd-chips-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:6px 0 16px; }
     .rd-pills, .rd-presets, .rd-active { display:inline-flex; flex-wrap:wrap; gap:6px; align-items:center; }
     .rd-pill, .rd-preset { min-height:32px; padding:6px 12px; border-radius:999px; border:1px solid var(--line-strong); background:transparent; color:var(--muted); font:600 12px "Manrope",sans-serif; cursor:pointer; }
-    .rd-pill[aria-pressed="true"], .rd-preset[aria-pressed="true"] { color:#0d0d0d; background:#e8b64c; border-color:#e8b64c; }
-    .rd-preset-n { font-family:"IBM Plex Mono",monospace; font-size:11px; opacity:.75; }
+    .rd-pill[aria-pressed="true"], .rd-preset[aria-pressed="true"] { color:#0d0d0d; background:#dcb26a; border-color:#dcb26a; }
+    .rd-preset-n { font-family:"IBM Plex Mono",monospace; font-size:12px; opacity:.75; }
     .rd-active-chip { display:inline-flex; align-items:center; gap:7px; min-height:32px; padding:5px 8px 5px 12px; border-radius:999px; border:1px solid var(--accent); color:var(--accent-strong); background:var(--accent-soft); font:600 12px "Manrope",sans-serif; }
     .rd-active-chip button { width:22px; height:22px; border:0; border-radius:999px; background:rgba(0,0,0,.25); color:inherit; cursor:pointer; line-height:1; }
     .rd-clear { min-height:32px; padding:6px 10px; border:0; background:transparent; color:var(--muted); font:600 12px "Manrope",sans-serif; cursor:pointer; text-decoration:underline; }
     .rd-count { margin-left:auto; color:var(--muted); font:500 12px "IBM Plex Mono",monospace; }
     .rd-results { min-height:200px; }
     .rd-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
-    .rd-gcard { position:relative; display:flex; flex-direction:column; gap:7px; min-height:168px; padding:16px; text-align:left; background:#222228; border:1px solid var(--line-strong); border-radius:14px; color:var(--ink); cursor:pointer; font-family:"Manrope",sans-serif; animation:rd-in .18s ease-out both; animation-delay:var(--d,0ms); }
+    .rd-gcard { position:relative; display:flex; flex-direction:column; gap:7px; min-height:168px; padding:16px; text-align:left; background:#222222; border:1px solid var(--line-strong); border-radius:14px; color:var(--ink); cursor:pointer; font-family:"Manrope",sans-serif; animation:rd-in .18s ease-out both; animation-delay:var(--d,0ms); }
     .rd-gcard:hover { border-color:var(--accent); }
-    .rd-gcard:focus-visible, .rd-lrow:focus-visible, .rd-deck-card:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+    .rd-gcard:focus-visible, .rd-lrow:focus-visible, .rd-deck-card:focus-visible { outline:2px solid var(--accent-strong); outline-offset:2px; }
     .rd-gcard.g5 { background:#36363b; border-left:2px solid var(--accent); }
     @keyframes rd-in { from { transform:translateY(8px); } to { transform:translateY(0); } }
     @media (prefers-reduced-motion: reduce) { .rd-gcard { animation:none; } }
     .rd-g-top { display:flex; align-items:center; gap:8px; }
     .rd-grade { font:600 15px "IBM Plex Mono",monospace; color:var(--accent); }
     .rd-gcard.g5 .rd-grade { color:var(--accent-strong); }
-    .rd-g-rank { font:600 11px "IBM Plex Mono",monospace; color:var(--accent-strong); }
-    .rd-g-status { margin-left:auto; padding:3px 9px; border-radius:999px; font:600 10.5px "IBM Plex Mono",monospace; text-transform:uppercase; letter-spacing:.05em; }
+    .rd-g-rank { font:600 12px "IBM Plex Mono",monospace; color:var(--accent-strong); }
+    .rd-g-status { margin-left:auto; padding:3px 9px; border-radius:999px; font:600 12px "IBM Plex Mono",monospace; text-transform:uppercase; letter-spacing:.05em; }
     .rd-g-status.test-queued { color:var(--try); background:var(--try-soft); }
     .rd-g-status.live { color:#0d0d0d; background:var(--accent-strong); }
     .rd-g-title { font:700 17px/22px "Manrope",sans-serif; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
     .rd-g-verdict { font:400 14px/20px "Manrope",sans-serif; color:#cbc6bf; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-    .rd-g-meta { margin-top:auto; font:500 11px "IBM Plex Mono",monospace; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+    .rd-g-meta { margin-top:auto; font:500 12px "IBM Plex Mono",monospace; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
     .rd-mark { background:var(--accent-soft); color:var(--accent-strong); border-radius:3px; padding:0 1px; }
     .rd-list { display:flex; flex-direction:column; border:1px solid var(--line-strong); border-radius:14px; overflow:hidden; }
-    .rd-lrow { display:flex; align-items:center; gap:12px; min-height:44px; padding:6px 14px; background:#222228; border:0; border-bottom:1px solid var(--line); color:var(--ink); cursor:pointer; text-align:left; font-family:"Manrope",sans-serif; width:100%; }
+    .rd-lrow { display:flex; align-items:center; gap:12px; min-height:44px; padding:6px 14px; background:#222222; border:0; border-bottom:1px solid var(--line); color:var(--ink); cursor:pointer; text-align:left; font-family:"Manrope",sans-serif; width:100%; }
     .rd-lrow:last-child { border-bottom:0; }
-    .rd-lrow:hover { background:#2a2a30; }
+    .rd-lrow:hover { background:#2a2a2a; }
     .rd-l-grade { font:600 13px "IBM Plex Mono",monospace; color:var(--accent); flex:0 0 30px; }
     .rd-lrow.g5 .rd-l-grade { color:var(--accent-strong); }
     .rd-l-main { flex:1 1 auto; min-width:0; display:flex; flex-direction:column; }
-    .rd-l-title { font:600 14.5px "Manrope",sans-serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .rd-l-sub { display:none; font:500 11px "IBM Plex Mono",monospace; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+    .rd-l-title { font:600 15px "Manrope",sans-serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .rd-l-sub { display:none; font:500 12px "IBM Plex Mono",monospace; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
     .rd-l-goes, .rd-l-lane, .rd-l-status, .rd-l-date { font:500 12px "IBM Plex Mono",monospace; color:var(--muted); flex:0 0 auto; }
     .rd-l-status.test-queued { color:var(--try); }
     .rd-l-status.live { color:var(--accent-strong); }
     .rd-fan-note { position:absolute; z-index:12; bottom:74px; left:0; right:0; text-align:center; }
-    .rd-fan-note button { border:0; background:transparent; color:var(--accent-strong); font:600 12.5px "Manrope",sans-serif; cursor:pointer; text-decoration:underline; padding:10px; }
+    .rd-fan-note button { border:0; background:transparent; color:var(--accent-strong); font:600 13px "Manrope",sans-serif; cursor:pointer; text-decoration:underline; padding:10px; }
     .rd-deck-controls { position:absolute; z-index:12; bottom:16px; left:20px; right:20px; display:flex; align-items:center; gap:14px; }
     .rd-deck-arrow { width:44px; height:44px; flex:0 0 44px; border-radius:12px; border:1px solid var(--line-strong); background:rgba(13,13,13,.7); color:var(--ink); font-size:17px; cursor:pointer; }
     .rd-deck-arrow:disabled { opacity:.35; cursor:default; }
@@ -1666,7 +1664,7 @@ body::before {
     .rd-sheet-sort { display:flex; align-items:center; gap:10px; padding:6px 18px 10px; font:600 12px "IBM Plex Mono",monospace; text-transform:uppercase; color:var(--muted); }
     .rd-sheet-body { overflow:auto; padding:0 18px 12px; max-height:52vh; }
     .rd-sheet-group { border-top:1px solid var(--line); padding:12px 0 6px; }
-    .rd-sheet-group h5 { margin:0 0 8px; font:600 11px "IBM Plex Mono",monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+    .rd-sheet-group h5 { margin:0 0 8px; font:600 12px "IBM Plex Mono",monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
     .rd-sheet-foot { position:sticky; bottom:0; display:flex; gap:10px; padding:12px 18px 18px; background:#1c1c1c; border-top:1px solid var(--line); }
     .rd-sheet-show { flex:1; min-height:48px; border:0; border-radius:12px; background:var(--accent); color:#0d0d0d; font:700 14px "Manrope",sans-serif; cursor:pointer; }
     .rd-sheet-reset { min-height:48px; padding:0 18px; border-radius:12px; border:1px solid var(--line-strong); background:transparent; color:var(--muted); font:600 14px "Manrope",sans-serif; cursor:pointer; }
@@ -1715,6 +1713,45 @@ body::before {
       .rd-l-status { display:none; }
       .rd-gcard, .rd-lrow { scroll-margin-top:140px; }
     }
+
+    /* === Deck v2.1 polish (2026-10-18, Judge/Pixel/Ravyn final calls) === */
+    /* P1 fan: taller shell + stage clear of header and controls; note lives in the counter row */
+    .rd-deck-shell { min-height:524px; }
+    .rd-deck-stage { inset:66px 0 74px; }
+    .rd-deck-card { max-height:100%; }
+    .rd-deck-card .rd-card-title strong { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .rd-fan-note { position:static; flex:0 1 auto; text-align:center; }
+    .rd-fan-note button { border:0; background:transparent; color:var(--accent-strong); font:600 13px "Manrope",sans-serif; cursor:pointer; text-decoration:underline; padding:10px; min-height:44px; display:inline-flex; align-items:center; pointer-events:auto; }
+    @media (max-width:640px) {
+      .rd-deck-shell { min-height:528px; }
+      .rd-deck-stage { inset:56px 0 74px; }
+      .rd-deck-header { top:8px; }
+    }
+    /* P2 desktop: sticky toolbar (nav is 73px) + anchor margins under it */
+    @media (min-width:900px) {
+      .rd-bar { position:sticky; top:73px; z-index:30; background:#141414; padding:8px 0; }
+      .rd-gcard, .rd-lrow { scroll-margin-top:150px; }
+    }
+    /* P2 popovers: capped height + internal scroll; JS flips when the fold is close */
+    .rd-pop { max-height:min(430px, calc(100dvh - 170px)); overflow-y:auto; }
+    .rd-pop.rd-pop-up { top:auto; bottom:calc(100% + 6px); }
+    /* P4 sheet close target */
+    .rd-sheet-x { width:44px; height:44px; font-size:15px; }
+    /* P6 sheet: drag handle + safe-area footer */
+    .rd-sheet-handle { width:36px; height:4px; border-radius:999px; background:var(--line-strong); margin:10px auto 2px; }
+    .rd-sheet-foot { padding-bottom:calc(18px + env(safe-area-inset-bottom)); }
+    /* P5: one focus token on every deck control */
+    #panel-raindrop :focus-visible, #rd-overlay :focus-visible, #rd-sheet :focus-visible { outline:2px solid var(--accent-strong); outline-offset:2px; }
+    /* P9/T3: empty-state actions and labels never wrap */
+    .rd-empty-actions .rd-sheet-reset { white-space:nowrap; }
+    .workspace-tab { white-space:nowrap; }
+    #download-board { white-space:nowrap; }
+    /* N11: fade the scrollable edge of the phone chip row (class set by JS when it overflows) */
+    @media (max-width:899px) {
+      .rd-view-btn { min-width:44px; }
+      .rd-chips-row.rd-fade-r { -webkit-mask-image:linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask-image:linear-gradient(90deg, #000 calc(100% - 24px), transparent); }
+    }
+
 </style>
 </head>
 <body>
@@ -1930,10 +1967,10 @@ body::before {
         <section class="rd-deck-shell" id="rd-deck-shell" aria-label="Browse Raindrop keepers" hidden>
           <div class="rd-deck-header">
             <span class="rd-deck-count" id="rd-deck-count" aria-live="polite"></span>
+            <div class="rd-fan-note" id="rd-fan-note" hidden></div>
             <span class="rd-deck-hint">Browse the deck · open a card for full details</span>
           </div>
           <div class="rd-deck-stage" id="rd-deck-stage"></div>
-          <div class="rd-fan-note" id="rd-fan-note" hidden></div>
           <div class="rd-deck-controls">
             <button class="rd-deck-arrow" id="rd-deck-prev" type="button" aria-label="Previous card">&larr;</button>
             <div class="rd-scrub" id="rd-scrub" role="slider" aria-label="Jump in deck" aria-valuemin="1" aria-valuemax="1" aria-valuenow="1" tabindex="0"><div class="rd-scrub-track"><div class="rd-scrub-fill" id="rd-scrub-fill"></div></div></div>
@@ -1943,6 +1980,7 @@ body::before {
       </div>
       <div class="rd-empty" id="rd-empty" hidden><strong>Nothing matches.</strong><p id="rd-empty-cause"></p><div class="rd-empty-actions" id="rd-empty-actions"></div></div>
       <dialog class="rd-sheet" id="rd-sheet" aria-label="Deck filters">
+        <div class="rd-sheet-handle" aria-hidden="true"></div>
         <div class="rd-sheet-head"><strong>Filters</strong><button class="rd-sheet-x" id="rd-sheet-x" type="button" aria-label="Close filters">✕</button></div>
         <div class="rd-sheet-sort"><label for="rd-sort-m">Sort</label><select class="select-control" id="rd-sort-m"><option value="rank">Top 20 rank</option><option value="newest">Newest</option><option value="grade">Grade ↓</option><option value="lane">Lane</option><option value="title">Title A–Z</option></select></div>
         <div class="rd-sheet-body" id="rd-sheet-body"></div>
@@ -4033,6 +4071,10 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         if (rdFilters.q.trim()) n++;
         return n;
       }
+      function rdChipsFade() {
+        var row = document.getElementById("rd-chips-row");
+        if (row) row.classList.toggle("rd-fade-r", row.scrollWidth > row.clientWidth + 2);
+      }
       function rdRenderChips() {
         var wrap = document.getElementById("rd-active");
         var chips = [];
@@ -4047,6 +4089,7 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         if (rdActiveFilterCount() > 0) chips.push('<button class="rd-clear" type="button" data-rd-clear="all">Clear all</button>');
         wrap.innerHTML = chips.join("");
         document.getElementById("rd-count").textContent = rdVisibleCards.length + " of " + RAINDROP_CARDS.length;
+        rdChipsFade();
         var fn = document.getElementById("rd-filters-n");
         var total = rdActiveFilterCount();
         fn.hidden = total === 0; fn.textContent = total;
@@ -4098,14 +4141,19 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         rdFilters.frame.forEach(function (v) { parts.push("Frame: " + v); });
         rdFilters.collection.forEach(function (v) { parts.push("Collection: " + v); });
         if (rdFilters.gradeMin > 0) parts.push("Grade " + rdFilters.gradeMin + "+");
-        if (rdFilters.preset) parts.push("Preset: " + rdFilters.preset);
+        var rdPresetLabels = { top20: "★ Top 20", ready: "Ready to test", latest: "Latest adds", five: "5★" };
+        if (rdFilters.preset) parts.push("Preset: " + (rdPresetLabels[rdFilters.preset] || rdFilters.preset));
         document.getElementById("rd-empty-cause").textContent = parts.length ? "No cards match " + parts.join(" + ") + "." : "";
-        var actions = ['<button class="rd-sheet-reset" type="button" data-rd-clear="all">Clear all filters</button>'];
+        var actions = [];
+        if (rdFilters.preset) actions.push('<button class="rd-sheet-reset" type="button" data-rd-clear="preset">Remove ' + escapeHtml(rdPresetLabels[rdFilters.preset] || rdFilters.preset) + "</button>");
+        if (rdFilters.q.trim()) actions.push('<button class="rd-sheet-reset" type="button" data-rd-clear="search">Clear search</button>');
+        if (rdFilters.gradeMin > 0) actions.push('<button class="rd-sheet-reset" type="button" data-rd-clear="grade">Remove grade filter</button>');
         var singles = ["status", "goesTo", "lane", "frame", "collection"].filter(function (k) { return rdFilters[k].length === 1; });
         if (singles.length === 1 && parts.length > 1) {
           var k = singles[0];
           actions.push('<button class="rd-sheet-reset" type="button" data-rd-clear="' + k + ":" + escapeHtml(rdFilters[k][0]) + '">Remove ' + escapeHtml(rdFilters[k][0]) + "</button>");
         }
+        actions.push('<button class="rd-sheet-reset" type="button" data-rd-clear="all">Clear all filters</button>');
         document.getElementById("rd-empty-actions").innerHTML = actions.join("");
       }
       function renderRaindrop() {
@@ -4134,6 +4182,7 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
           var on = b.getAttribute("data-rd-view") === rdView;
           b.classList.toggle("active", on);
           b.setAttribute("aria-checked", on ? "true" : "false");
+          b.tabIndex = on ? 0 : -1;
         });
         rdRenderChips();
         var sortSel = document.getElementById("rd-sort"); if (sortSel) sortSel.value = rdFilters.sort;
@@ -4162,23 +4211,29 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         if (["grid", "list", "fan"].indexOf(v) === -1) return;
         if (rdView === "fan" && rdVisibleCards.length) rdAnchorIdx = RAINDROP_CARDS.indexOf(rdVisibleCards[rdDeckIndex]);
         else rdCaptureViewportAnchor();
+        var capTop = null;
+        if (anchorScroll && rdAnchorIdx >= 0 && v !== "fan") {
+          var capEl = rdFindCardEl(rdAnchorIdx);
+          if (capEl) capTop = capEl.getBoundingClientRect().top;
+        }
         rdView = v;
         try { localStorage.setItem("ll.rd.view", v); } catch (e) {}
         renderRaindrop();
-        if (anchorScroll && rdAnchorIdx >= 0) {
+        if (anchorScroll && rdAnchorIdx >= 0 && capTop !== null) {
           var idx = rdAnchorIdx;
-          var scrollToCard = function () {
+          var restoreOffset = function () {
             var el = rdFindCardEl(idx);
             if (!el) return;
-            var margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
-            var y = el.getBoundingClientRect().top + window.scrollY - margin;
-            try { window.scrollTo({ top: Math.max(0, y), behavior: "instant" }); }
-            catch (err) { window.scrollTo(0, Math.max(0, y)); }
+            var delta = el.getBoundingClientRect().top - capTop;
+            if (Math.abs(delta) > 1) {
+              try { window.scrollTo({ top: Math.max(0, window.scrollY + delta), behavior: "instant" }); }
+              catch (err) { window.scrollTo(0, Math.max(0, window.scrollY + delta)); }
+            }
           };
-          requestAnimationFrame(function () { requestAnimationFrame(scrollToCard); });
+          requestAnimationFrame(function () { requestAnimationFrame(restoreOffset); });
           setTimeout(function () {
             var el = rdFindCardEl(idx);
-            if (el && Math.abs(el.getBoundingClientRect().top - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0)) > 48) scrollToCard();
+            if (el && Math.abs(el.getBoundingClientRect().top - capTop) > 8) restoreOffset();
           }, 180);
         }
       }
@@ -4216,9 +4271,9 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         if (rdFilters.sort !== "rank") p.push("sort=" + rdFilters.sort);
         try { history.replaceState(null, "", "#raindrop" + (p.length ? "?" + p.join("&") : "")); } catch (e) {}
       }
-      function rdApplyHash() {
+      function rdApplyHash(noScroll) {
         var h = location.hash || "";
-        if (h.indexOf("#raindrop") !== 0) return false;
+        if (h.replace(/^#/, "").split("?")[0].toLowerCase() !== "raindrop") return false;
         var qs = h.split("?")[1] || "";
         var params = {};
         qs.split("&").forEach(function (pair) { if (!pair) return; var kv = pair.split("="); params[kv[0]] = decodeURIComponent(kv.slice(1).join("=") || ""); });
@@ -4234,9 +4289,29 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         showWorkspace("raindrop");
         renderRaindrop();
         var panel = document.getElementById("panel-raindrop");
-        if (panel) panel.scrollIntoView({ block: "start" });
+        if (panel && !noScroll) panel.scrollIntoView({ block: "start" });
         return true;
       }
+      function rdRouteHash(atBoot) {
+        var raw = location.hash || "";
+        var body = raw.replace(/^#/, "");
+        if (!body) return;
+        var name = (body.split("?")[0] || "").toLowerCase();
+        var known = ["reviews", "bookmarks", "spitballs", "todos", "favorites", "gradients", "tools", "raindrop"];
+        if (known.indexOf(name) === -1) {
+          showWorkspace("reviews");
+          try { history.replaceState(null, "", "#reviews"); } catch (e) {}
+          return;
+        }
+        if (name === "raindrop") { rdApplyHash(!atBoot); return; }
+        showWorkspace(name);
+        if (raw !== "#" + name) { try { history.replaceState(null, "", "#" + name); } catch (e) {} }
+      }
+      window.rdSyncTabHash = function (name) {
+        if (name === "raindrop") { rdSyncHash(); return; }
+        var want = "#" + name;
+        if ((location.hash || "") !== want) { try { history.replaceState(null, "", want); } catch (e) {} }
+      };
       function rdClearSilent() {
         rdFilters = { q: "", status: [], goesTo: [], lane: [], frame: [], collection: [], gradeMin: 0, sort: "rank", preset: null };
         var s = document.getElementById("rd-search"); if (s) s.value = "";
@@ -4296,6 +4371,8 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         var pop = document.getElementById("rd-pop");
         if (pop && !pop.hidden) {
           pop.hidden = true;
+          pop.classList.remove("rd-pop-up");
+          pop.style.maxHeight = "";
           var host = document.getElementById("rd-facet-host");
           var panel = pop.querySelector(".rd-facet-panel");
           if (panel && host) host.appendChild(panel);
@@ -4321,6 +4398,15 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         btn.setAttribute("aria-expanded", "true");
         rdOpenFacet = key;
         rdRenderFacetOptions(key);
+        pop.classList.remove("rd-pop-up");
+        pop.style.maxHeight = "";
+        var popRect = pop.getBoundingClientRect();
+        if (popRect.bottom > window.innerHeight - 8) {
+          var btnRect = btn.getBoundingClientRect();
+          var spaceBelow = window.innerHeight - btnRect.bottom;
+          if (btnRect.top > spaceBelow) pop.classList.add("rd-pop-up");
+          else pop.style.maxHeight = Math.max(160, spaceBelow - 18) + "px";
+        }
         var search = panel.querySelector(".rd-facet-search");
         if (search) search.focus();
       }
@@ -4381,6 +4467,25 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         document.getElementById("rd-sort-m").addEventListener("change", function (e) { rdFilters.sort = e.target.value; rdDeckIndex = 0; renderRaindrop(); });
         document.getElementById("rd-active").addEventListener("click", function (e) { rdChipClear(e); });
         document.getElementById("rd-empty-actions").addEventListener("click", function (e) { rdChipClear(e); });
+        var rdSwitchEl = document.querySelector(".rd-view-switch");
+        if (rdSwitchEl) rdSwitchEl.addEventListener("keydown", function (e) {
+          var order = ["grid", "list", "fan"];
+          var i = order.indexOf(rdView);
+          var next = null;
+          if (e.key === "ArrowRight" || e.key === "ArrowDown") next = order[(i + 1) % 3];
+          else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = order[(i + 2) % 3];
+          else if (e.key === "Home") next = order[0];
+          else if (e.key === "End") next = order[2];
+          if (next) {
+            e.preventDefault();
+            rdSetView(next, true);
+            var nb = document.querySelector('[data-rd-view="' + next + '"]');
+            if (nb) nb.focus();
+          }
+        });
+        var rdSheetEl = document.getElementById("rd-sheet");
+        if (rdSheetEl) rdSheetEl.addEventListener("click", function (e) { if (e.target === rdSheetEl) rdCloseSheet(); });
+        window.addEventListener("resize", function () { rdChipsFade(); });
         document.getElementById("rd-results").addEventListener("click", function (e) {
           var gridBtn = e.target.closest("[data-rd-goto-grid]");
           if (gridBtn) { rdSetView("grid", false); return; }
@@ -4435,8 +4540,8 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
             tile.setAttribute("role", "link");
             tile.setAttribute("tabindex", "0");
             tile.setAttribute("aria-label", "Show the ready-to-test Raindrop cards");
-            tile.addEventListener("click", function () { location.hash = "#raindrop?preset=ready"; rdApplyHash(); });
-            tile.addEventListener("keydown", function (e) { if (e.key === "Enter") { location.hash = "#raindrop?preset=ready"; rdApplyHash(); } });
+            tile.addEventListener("click", function () { try { history.replaceState(null, "", "#raindrop?preset=ready"); } catch (e) {} rdApplyHash(); });
+            tile.addEventListener("keydown", function (e) { if (e.key === "Enter") { try { history.replaceState(null, "", "#raindrop?preset=ready"); } catch (e) {} rdApplyHash(); } });
           }
         }
         document.addEventListener("keydown", function (e) {
@@ -4467,10 +4572,10 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
             }
           }
         });
-        window.addEventListener("hashchange", function () { rdApplyHash(); });
+        window.addEventListener("hashchange", function () { rdRouteHash(false); });
         renderRaindrop();
         rdHashReady = true;
-        rdApplyHash();
+        rdRouteHash(true);
       }
       function rdChipClear(e) {
         var btn = e.target.closest("[data-rd-clear]");
@@ -4478,6 +4583,7 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         var what = btn.getAttribute("data-rd-clear");
         if (what === "all") { rdClearFilters(); return; }
         if (what === "preset") { rdFilters.preset = null; }
+        else if (what === "search") { rdFilters.q = ""; var si = document.getElementById("rd-search"); if (si) si.value = ""; }
         else if (what === "grade") { rdFilters.gradeMin = 0; }
         else {
           var kv = what.split(":");
@@ -4525,6 +4631,7 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         document.querySelectorAll("[data-panel]").forEach(function (panel) { panel.hidden = panel.getAttribute("data-panel") !== name; });
         document.querySelectorAll("[data-workspace]").forEach(function (tab) { tab.classList.toggle("active", tab.getAttribute("data-workspace") === name); });
         renderUtilities();
+        if (window.rdSyncTabHash) window.rdSyncTabHash(name);
       }
 
       function commandEntries() {
