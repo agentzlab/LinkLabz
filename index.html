@@ -1545,7 +1545,7 @@ body::before {
     .rd-deck-dot[aria-current="true"] { width:24px; background:#dcb26a; border-radius:5px; }
     .rd-empty { padding:54px 24px; color:var(--muted); text-align:center; background:var(--surface-solid); border:1px solid var(--line-strong); border-radius:14px; margin-top:16px; }
     .rd-chip { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:3px 9px; border-radius:999px; border:1px solid var(--line-strong); color:var(--muted); }
-    .rd-chip.lane { color:#f0d9a8; border-color:rgba(232,182,76,.45); }
+    .rd-chip.lane { color:#f0d9a8; border-color:rgba(220,178,106,.45); }
     .rd-chip.on-deck { color:#9aaa95; border-color:rgba(154,170,149,.45); }
     .rd-chip.lead { color:#dcb26a; border-color:rgba(220,178,106,.45); }
     .rd-stars { color:#dcb26a; letter-spacing:2px; font-size:13px; }
@@ -1731,7 +1731,10 @@ body::before {
     @media (min-width:900px) {
       .rd-bar { position:sticky; top:73px; z-index:30; background:#141414; padding:8px 0; }
       .rd-gcard, .rd-lrow { scroll-margin-top:150px; }
+      .rd-deck-stage { inset:66px 0 86px; }
     }
+    /* M3: no legacy violet halo on deck inputs/selects (board tokens untouched) */
+    #panel-raindrop .search:focus, #panel-raindrop .select-control:focus, #rd-sheet .search:focus, #rd-sheet .select-control:focus { border-color:var(--line-strong); box-shadow:none; }
     /* P2 popovers: capped height + internal scroll; JS flips when the fold is close */
     .rd-pop { max-height:min(430px, calc(100dvh - 170px)); overflow-y:auto; }
     .rd-pop.rd-pop-up { top:auto; bottom:calc(100% + 6px); }
@@ -4197,12 +4200,18 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         var box = rdView === "grid" ? document.getElementById("rd-grid") : rdView === "list" ? document.getElementById("rd-list") : null;
         if (!box || box.hidden) return;
         var els = box.querySelectorAll("[data-rd-open]");
+        var thresh = 90;
+        var barEl = document.getElementById("rd-bar");
+        if (barEl && barEl.offsetParent !== null) {
+          var br = barEl.getBoundingClientRect();
+          if (br.top <= 74) thresh = Math.max(90, Math.ceil(br.bottom) + 2);
+        }
         var firstPartial = null;
         for (var i = 0; i < els.length; i++) {
           var r = els[i].getBoundingClientRect();
-          if (r.bottom > 90 && r.top < window.innerHeight) {
+          if (r.bottom > thresh && r.top < window.innerHeight) {
             if (!firstPartial) firstPartial = els[i];
-            if (r.top >= 90 && r.bottom <= window.innerHeight) { rdAnchorIdx = parseInt(els[i].getAttribute("data-rd-open"), 10); return; }
+            if (r.top >= thresh && r.bottom <= window.innerHeight) { rdAnchorIdx = parseInt(els[i].getAttribute("data-rd-open"), 10); return; }
           }
         }
         if (firstPartial) rdAnchorIdx = parseInt(firstPartial.getAttribute("data-rd-open"), 10);
@@ -4282,9 +4291,9 @@ DONE = install + Cursor connect + one prototype + export verified + verdict + re
         ["status", "goesTo", "lane", "frame", "collection"].forEach(function (k) {
           if (params[k]) rdFilters[k] = params[k].split(",").map(function (v) { return decodeURIComponent(v); }).filter(Boolean);
         });
-        if (params.grade) rdFilters.gradeMin = parseFloat(params.grade) || 0;
-        if (params.sort) rdFilters.sort = params.sort;
-        if (params.preset) rdFilters.preset = params.preset;
+        if (params.grade) { var gv = parseFloat(params.grade); rdFilters.gradeMin = [4, 4.5, 5].indexOf(gv) !== -1 ? gv : 0; }
+        if (params.sort && ["rank", "newest", "grade", "lane", "title"].indexOf(params.sort) !== -1) rdFilters.sort = params.sort;
+        if (params.preset && ["top20", "ready", "latest", "five"].indexOf(params.preset) !== -1) rdFilters.preset = params.preset;
         rdDeckIndex = 0;
         showWorkspace("raindrop");
         renderRaindrop();
