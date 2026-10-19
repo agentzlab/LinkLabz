@@ -1735,7 +1735,7 @@ body::before {
     }
     /* X1: unbreakable slash-joined words must never widen the phone grid or clip the detail */
     @media (max-width:640px) { .rd-grid { grid-template-columns:minmax(0,1fr); } }
-    .rd-g-title, .rd-g-verdict, .rd-detail h2, .rd-detail p { overflow-wrap:anywhere; }
+    .rd-g-title, .rd-g-verdict, .rd-detail h2, .rd-detail p, .rd-detail .rd-verdict { overflow-wrap:anywhere; }
     /* M3: no legacy violet halo on deck inputs/selects (board tokens untouched) */
     #panel-raindrop .search:focus, #panel-raindrop .select-control:focus, #rd-sheet .search:focus, #rd-sheet .select-control:focus { border-color:var(--line-strong); box-shadow:none; }
     /* P2 popovers: capped height + internal scroll; JS flips when the fold is close */
