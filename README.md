@@ -9,7 +9,7 @@
 
 **Live preview:** https://agentzlab.github.io/LinkLabz/
 
-![LinkLabz — the review board, dark mode](assets/screenshot.png?v=202611070052)
+![LinkLabz — the review board, dark mode](assets/screenshot.png?v=202611072254)
 
 ## What's inside
 
@@ -26,7 +26,7 @@ LinkLabz is Jon's visual link review board — a single-page app for working thr
 
 ## Screenshots
 
-![Raindrop keeper deck](assets/screenshot-raindrop.png?v=202611070052)
+![Raindrop keeper deck](assets/screenshot-raindrop.png?v=202611072254)
 
 *The Raindrop keeper deck — graded cards; click through for the full verdict and harvest notes.*
 
